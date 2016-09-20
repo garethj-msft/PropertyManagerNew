@@ -84,6 +84,50 @@ namespace SuiteLevelWebApp.Services
             }
         }
 
+        public static async Task<Bucket> GetBucketByNameAsync(Plan plan, string bucketName)
+        {
+            var accessToken = AuthenticationHelper.GetGraphAccessTokenAsync();
+
+            var bucketsEndpoint = string.Format("{0}plans/{1}/buckets", AADAppSettings.GraphBetaResourceUrl, plan.id);
+
+            try
+            {
+                using (var client = new HttpClient())
+                {
+                    client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", await accessToken);
+                    client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+                    var responseMessage = await client.GetAsync(bucketsEndpoint);
+
+                    if (responseMessage.StatusCode != System.Net.HttpStatusCode.OK)
+                        throw new Exception();
+
+                    var payload = await responseMessage.Content.ReadAsStringAsync();
+
+                    var jobject = JObject.Parse(payload);
+                    var retVal = new Bucket
+                    {
+                        planId = plan.id,
+                        name = bucketName
+                    };
+                    var matchingBuckets = jobject["value"].Children().Where(t => t["name"].ToString() == bucketName);
+                    if (matchingBuckets.Count() > 0)
+                    {
+                        retVal.id = matchingBuckets.First()["id"].ToString();
+                        return retVal;
+                    }
+                    else
+                    {
+                        return await CreateBucketAsync(retVal);
+                    }
+                }
+            }
+            catch
+            {
+                return null;
+            }
+        }
+
+
         public static async Task<Bucket> CreateBucketAsync(Bucket bucket)
         {
             var accessToken = AuthenticationHelper.GetGraphAccessTokenAsync();
