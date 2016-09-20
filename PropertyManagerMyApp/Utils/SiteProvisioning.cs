@@ -440,7 +440,7 @@ namespace SuiteLevelWebApp.Utils
                     };
 
                     user = await GraphServiceExtension.AddUserAsync(graphService, user);
-                    await GraphServiceExtension.AssignLicenseAsyncViaHttpClientAsync(graphService, graphAccessToken, user as Graph.User);
+                    await GraphServiceExtension.AssignLicenseAsync(graphService, graphAccessToken, user as Graph.User);
                 }
 
                 if (groupsDict.ContainsKey(ownGroupDisplayName)
@@ -624,7 +624,7 @@ namespace SuiteLevelWebApp.Utils
 
         public async Task UpdateExcelGroupsForPropertiesAsync(GraphServiceClient graphService, string graphAccessToken)
         {
-            var groups = await graphService.Groups.Request().GetAllAsnyc();
+            var groups = await graphService.Groups.Request().GetAllAsync();
             var propertyGroups = groups
                 .Where(i => i.Description == "Property Group")
                 .ToArray();
@@ -676,7 +676,7 @@ namespace SuiteLevelWebApp.Utils
 
         public async Task UpdateGroupPhotoAsync(GraphServiceClient graphService)
         {
-            var groups = await graphService.Groups.Request().GetAllAsnyc();
+            var groups = await graphService.Groups.Request().GetAllAsync();
             var propertyGroups = groups
                 .Where(i => i.Description == "Property Group")
                 .ToArray();

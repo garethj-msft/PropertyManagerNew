@@ -25,13 +25,13 @@ namespace SuiteLevelWebApp
         public static async Task<User[]> GetAllUsersAsync(this GraphServiceClient service)
         {
             var tenantDetails = await service.Users
-                .Request().GetAllAsnyc();
+                .Request().GetAllAsync();
             return tenantDetails;
         }
 
         public static async Task<User[]> GetAllUsersAsync(this GraphServiceClient service, IEnumerable<string> displayNames)
         {
-            var users = await service.Users.Request().GetAllAsnyc();
+            var users = await service.Users.Request().GetAllAsync();
             var retUsers = users.Where(x => displayNames.Contains(x.DisplayName)).ToArray();
 
             return retUsers;
@@ -84,7 +84,7 @@ namespace SuiteLevelWebApp
         public static async Task<User[]> GetGroupMembersAsync(this GraphServiceClient service, IGroupRequestBuilder groupFetcher)
         {
             List<User> users = new List<User>();
-            var collection = await groupFetcher.Members.Request().GetAllAsnyc();
+            var collection = await groupFetcher.Members.Request().GetAllAsync();
             foreach (var item in collection)
             {
                 var findUser = await service.Users[item.Id].Request().Select("id,displayName,department,officeLocation,mail,mobilePhone,businessPhones,jobTitle").GetAsync();
@@ -136,31 +136,18 @@ namespace SuiteLevelWebApp
         }
 
 
-        public static async Task AssignLicenseAsyncViaHttpClientAsync(this GraphServiceClient service, string GraphAccessToken, User user)
+        public static async Task AssignLicenseAsync(this GraphServiceClient service, string GraphAccessToken, User user)
         {
-            var subscribedSkus = await service.SubscribedSkus.Request().GetAllAsnyc();
+            var subscribedSkus = await service.SubscribedSkus.Request().GetAllAsync();
           
-            Guid skuId = Guid.Empty;
-
             foreach (SubscribedSku sku in subscribedSkus)
             {
-                if ((sku.PrepaidUnits.Enabled.Value > sku.ConsumedUnits) &&
-                        (sku.CapabilityStatus == "Enabled"))
+                if ((sku.CapabilityStatus == "Enabled") &&
+                     (sku.PrepaidUnits.Enabled.Value > sku.ConsumedUnits))
                 {
-                    skuId = sku.SkuId.Value;
-
-                    string json = string.Format("{{\"addLicenses\":[{{\"@odata.type\":\"#Microsoft.Graph.AssignedLicense\",\"disabledPlans\":[],\"skuId\":\"{0}\"}}],\"removeLicenses\":[]}}", skuId.ToString());
-
-                    string postUrl = string.Format("{0}{1}/users('{2}')/Microsoft.Graph.assignLicense", AADAppSettings.GraphResourceUrl, AppSettings.DemoSiteCollectionOwner.Split('@')[1], user.Id);
-
-                    var request = new HttpRequestMessage(HttpMethod.Post, postUrl);
-                    request.Headers.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-                    request.Headers.Authorization = new AuthenticationHeaderValue("Bearer", GraphAccessToken);
-                    request.Content = new StringContent(json, Encoding.UTF8, "application/json");
-                    var client = new HttpClient();
-                    await client.SendAsync(request);
+                    user = await service.Users[user.Id].AssignLicense(new[] { new AssignedLicense { SkuId = sku.SkuId.Value } }, new Guid[] { }).Request().PostAsync();
                 }
-            } 
+            }
         }
 
         public static async Task<Subscription> GetSubscriptionAsync(this GraphServiceClient service, string graphAccessToken, string subscriptionId)

@@ -31,7 +31,7 @@ namespace SuiteLevelWebApp
         //    return list.ToArray();
         //}
 
-        public static async Task<Message[]> GetAllAsnyc(this IUserMessagesCollectionRequest pagedCollectionRq)
+        public static async Task<Message[]> GetAllAsync(this IUserMessagesCollectionRequest pagedCollectionRq)
         {
             var list = new List<Message>();
 
@@ -51,7 +51,7 @@ namespace SuiteLevelWebApp
             }
             return list.ToArray();
         }
-        public static async Task<DriveItem[]> GetAllAsnyc(this IDriveItemChildrenCollectionRequest pagedCollectionRq)
+        public static async Task<DriveItem[]> GetAllAsync(this IDriveItemChildrenCollectionRequest pagedCollectionRq)
         {
             var list = new List<DriveItem>();
 
@@ -71,7 +71,7 @@ namespace SuiteLevelWebApp
             }
             return list.ToArray();
         }
-        public static async Task<Conversation[]> GetAllAsnyc(this IGroupConversationsCollectionRequest pagedCollectionRq)
+        public static async Task<Conversation[]> GetAllAsync(this IGroupConversationsCollectionRequest pagedCollectionRq)
         {
             var list = new List<Conversation>();
 
@@ -91,7 +91,7 @@ namespace SuiteLevelWebApp
             }
             return list.ToArray();
         }
-        public static async Task<User[]> GetAllAsnyc(this IGraphServiceUsersCollectionRequest pagedCollectionRq)
+        public static async Task<User[]> GetAllAsync(this IGraphServiceUsersCollectionRequest pagedCollectionRq)
         {
             var list = new List<User>();
 
@@ -111,7 +111,7 @@ namespace SuiteLevelWebApp
             }
             return list.ToArray();
         }
-        public static async Task<Group[]> GetAllAsnyc(this IGraphServiceGroupsCollectionRequest pagedCollectionRq)
+        public static async Task<Group[]> GetAllAsync(this IGraphServiceGroupsCollectionRequest pagedCollectionRq)
         {
             var list = new List<Group>();
 
@@ -131,7 +131,7 @@ namespace SuiteLevelWebApp
             }
             return list.ToArray();
         }
-        public static async Task<DirectoryObject[]> GetAllAsnyc(this IGroupMembersCollectionWithReferencesRequest pagedCollectionRq)
+        public static async Task<DirectoryObject[]> GetAllAsync(this IGroupMembersCollectionWithReferencesRequest pagedCollectionRq)
         {
             var list = new List<DirectoryObject>();
 
@@ -151,7 +151,7 @@ namespace SuiteLevelWebApp
             }
             return list.ToArray();
         }
-        public static async Task<SubscribedSku[]> GetAllAsnyc(this IGraphServiceSubscribedSkusCollectionRequest pagedCollectionRq)
+        public static async Task<SubscribedSku[]> GetAllAsync(this IGraphServiceSubscribedSkusCollectionRequest pagedCollectionRq)
         {
             var list = new List<SubscribedSku>();
 
@@ -172,7 +172,7 @@ namespace SuiteLevelWebApp
             return list.ToArray();
         }
 
-        public static async Task<Event[]> GetAllAsnyc(this IUserEventsCollectionRequest pagedCollectionRq)
+        public static async Task<Event[]> GetAllAsync(this IUserEventsCollectionRequest pagedCollectionRq)
         {
             var list = new List<Event>();
             var collectionRequest = pagedCollectionRq;

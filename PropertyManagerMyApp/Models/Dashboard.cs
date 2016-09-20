@@ -552,7 +552,7 @@ namespace SuiteLevelWebApp.Models
         {
             List<HyperLink> result = new List<HyperLink>();
 
-            var messages = await graphService.Users[CurrentUser].Messages.Request().GetAllAsnyc();
+            var messages = await graphService.Users[CurrentUser].Messages.Request().GetAllAsync();
 
             var propertyOwners = await GetPropertyOwnersAsync(graphService);
 
@@ -619,7 +619,7 @@ namespace SuiteLevelWebApp.Models
 
             try
             {
-                files = await groupFetcher.Drive.Root.Children.Request().GetAllAsnyc();
+                files = await groupFetcher.Drive.Root.Children.Request().GetAllAsync();
             }
             catch
             {
@@ -705,7 +705,7 @@ namespace SuiteLevelWebApp.Models
 
         private async Task<HyperLink[]> GetConversationsAsync(IGroupRequestBuilder groupFethcer, string groupMail)
         {
-            var conversations = await groupFethcer.Conversations.Request().GetAllAsnyc();
+            var conversations = await groupFethcer.Conversations.Request().GetAllAsync();
             var webUrl = string.Format("{0}owa/#path=/group/{1}/mail", AADAppSettings.OutlookUrl, groupMail);
 
             return conversations.Select(i => new HyperLink

@@ -298,7 +298,7 @@ namespace SuiteLevelWebApp.Controllers
 
         public async Task<System.Collections.Generic.List<Microsoft.Graph.Group>> GetO365DemoGroups(GraphServiceClient graphService)
         {
-            return (await graphService.Groups.Request().GetAllAsnyc()).Where(x => x.Description == "Property Group").ToList();
+            return (await graphService.Groups.Request().GetAllAsync()).Where(x => x.Description == "Property Group").ToList();
         }
     }
 }
