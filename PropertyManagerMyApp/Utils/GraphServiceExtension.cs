@@ -97,7 +97,6 @@ namespace SuiteLevelWebApp
 
         public static async Task AddUserToGroupMembersAsync(this GraphServiceClient service, Group group, User user, string accessToken)
         {
-            
             var requestMessage = new HttpRequestMessage(HttpMethod.Post, string.Format("{0}groups/{1}/members/$ref", AADAppSettings.GraphResourceUrl, group.Id));
             var odataID = string.Format("{0}directoryObjects/{1}", AADAppSettings.GraphResourceUrl, user.Id);
             Dictionary<string, string> oData = new Dictionary<string, string>();

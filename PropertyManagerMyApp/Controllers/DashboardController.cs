@@ -57,6 +57,7 @@ namespace SuiteLevelWebApp.Controllers
 
             // Add the user to the GettingStarted group where newcomers share onboarding tasks
             await graphService.AddUserToGroupMembersAsync(gettingStarted, candidate, graphAccessToken);
+
             var gettingStartedPlan = await PlanService.GetPlanAsync(gettingStarted);
             var bucket = await PlanService.GetBucketByNameAsync(gettingStartedPlan, "Unstarted");
 
@@ -64,15 +65,7 @@ namespace SuiteLevelWebApp.Controllers
 
             // foreach (Thingy listItem in thingiesFromNewHireTasks)
             {
-                // TODO: Make a Planner task in the 'GettingStarted' group for each task in the NewHireTasks list.
-
-                //var incident = await GetIncidentByIdAsync(model.IncidentId);
-                //var repairPeopleMail = (await GetRepairPeopleByEmailAddressAsync(model.RepairPeopleSelectedValue)).sl_emailaddress;
-                //var repairPeopleList = (await graphService.Users.Request().Filter(string.Format("mail eq '{0}'", repairPeopleMail)).Top(1).GetAsync()).CurrentPage;
-                //var repairPeople = repairPeopleList.Count > 0 ? repairPeopleList[0] : null;
-                //if (repairPeople == null) return;
-                //var me = graphService.Me.Request().GetAsync();
-                //var property = incident.sl_propertyID;
+                // Make a Planner task in the 'GettingStarted' group for each task in the NewHireTasks list.
 
                 await PlanService.CreateTaskAsync(new task
                 {
