@@ -37,6 +37,32 @@ namespace SuiteLevelWebApp.Controllers
             return View(model);
         }
 
+        public async Task<ActionResult> AddInspector()
+        {
+            var sharePointToken = await AuthenticationHelper.GetAccessTokenAsync(AppSettings.DemoSiteServiceResourceId);
+            var graphService = await AuthenticationHelper.GetGraphServiceAsync(AADAppSettings.GraphResourceUrl);
+            Dashboard dashboardModel = new Dashboard(sharePointToken);
+            var model = await dashboardModel.GetDashboardAddInspectorViewModelAsync(graphService);
+            return View(model);
+        }
+
+        public async Task<ActionResult> AddInspectorExecute(AddInspectorViewModel viewModel)
+        {
+            var sharePointToken = await AuthenticationHelper.GetAccessTokenAsync(AppSettings.DemoSiteServiceResourceId);
+            var graphService = await AuthenticationHelper.GetGraphServiceAsync(AADAppSettings.GraphResourceUrl);
+            User candidate = await graphService.Users[viewModel.SelectedCandidate].Request().GetAsync();
+
+            // TODO: Iterate over the 'NewHireTasks' sharepoint list with the new API.
+
+            // TODO: Make a Planner task in the 'GettingStarted' group for each task in the NewHireTasks list.
+
+            // Make sure new user has all the licenses they need.
+            await GraphServiceExtension.AssignLicenseAsync(graphService, candidate);
+
+            return View(viewModel);
+        }
+
+
         public async Task<ActionResult> InspectionDetails(int id)
         {
             var sharePointToken = await AuthenticationHelper.GetAccessTokenAsync(AppSettings.DemoSiteServiceResourceId);

@@ -82,6 +82,33 @@ namespace SuiteLevelWebApp.Models
             return viewModel;
         }
 
+        public async Task<AddInspectorViewModel> GetDashboardAddInspectorViewModelAsync(GraphServiceClient graphService)
+        {
+            AddInspectorViewModel viewModel = new AddInspectorViewModel();
+
+            viewModel.Candidates = new List<InspectorViewModel>();
+
+            IEnumerable<User> inspectors = await graphService.GetGroupMembersAsync("Inspectors");
+            IEnumerable<User> allUsers = await graphService.GetAllUsersAsync();
+            var nonInspectors = allUsers.Except(inspectors, new UserComparerbyId());
+
+            viewModel.Candidates.AddRange(nonInspectors.Select(i => new InspectorViewModel { DisplayName = i.DisplayName, Id = i.Id, PrincipalName = i.UserPrincipalName }));
+            return viewModel;
+        }
+
+        private class UserComparerbyId : IEqualityComparer<User>
+        {
+            public bool Equals(User x, User y)
+            {
+                return x.Id == y.Id;
+            }
+
+            public int GetHashCode(User obj)
+            {
+                return obj.Id.GetHashCode();
+            }
+        }
+
         public async Task<DashboardInspectionDetailsViewModel> GetDashboardInspectionDetailsViewModelAsync(GraphServiceClient graphService, int incidentId, string CurrentUser)
         {
             Graph.User[] getRepairPeople = null;
@@ -753,6 +780,22 @@ namespace SuiteLevelWebApp.Models
         public string oneNoteUrl { get; set; }
         public string PlanId { get; set; }
         public bool bAnnotateImage { get; set; }
+    }
+
+    public class AddInspectorViewModel
+    {
+       public string SelectedCandidate { get; set; }
+
+       public List<InspectorViewModel> Candidates { get; set; }
+    }
+
+    public class InspectorViewModel
+    {
+        public string DisplayName { get; set; }
+
+        public string PrincipalName { get; set; }
+
+        public string Id { get; set; }
     }
     #endregion
 

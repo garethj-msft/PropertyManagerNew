@@ -440,7 +440,7 @@ namespace SuiteLevelWebApp.Utils
                     };
 
                     user = await GraphServiceExtension.AddUserAsync(graphService, user);
-                    await GraphServiceExtension.AssignLicenseAsync(graphService, graphAccessToken, user as Graph.User);
+                    await GraphServiceExtension.AssignLicenseAsync(graphService, user as Graph.User);
                 }
 
                 if (groupsDict.ContainsKey(ownGroupDisplayName)

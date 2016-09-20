@@ -1029,6 +1029,8 @@
     <Content Include="Views\WebHooks\Index.cshtml" />
     <Content Include="Views\WebHooks\Notification.cshtml" />
     <Content Include="Views\WebHooks\Subscription.cshtml" />
+    <Content Include="Views\Dashboard\AddInspector.cshtml" />
+    <Content Include="Views\Dashboard\AddInspectorExecute.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
       <SubType>Designer</SubType>

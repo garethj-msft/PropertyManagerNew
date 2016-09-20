@@ -136,7 +136,7 @@ namespace SuiteLevelWebApp
         }
 
 
-        public static async Task AssignLicenseAsync(this GraphServiceClient service, string GraphAccessToken, User user)
+        public static async Task AssignLicenseAsync(this GraphServiceClient service, User user)
         {
             var subscribedSkus = await service.SubscribedSkus.Request().GetAllAsync();
           
@@ -227,7 +227,7 @@ namespace SuiteLevelWebApp
                 await builder.Request().DeleteAsync();
                 return;
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 //throw ex;
             }

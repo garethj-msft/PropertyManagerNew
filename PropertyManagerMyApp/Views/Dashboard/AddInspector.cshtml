@@ -1,0 +1,36 @@
+﻿@model SuiteLevelWebApp.Models.AddInspectorViewModel
+@{
+    Layout = "~/Views/Shared/_DemoLayout.cshtml";
+    ViewBag.Title = "Add Inspector";
+
+}
+    <div class="container body-content home">
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 bg-gray-light">
+            <div class="row">
+                <ul>
+                    <li class="left-panel col-xs-4 col-sm-4 col-md-4 col-lg-4">
+                        <div class="details">
+                            <h1>
+                                Add Inspector
+                            </h1>
+                        </div>
+                    </li>
+                    <li class="right-panel col-xs-8 col-sm-8 col-md-8 col-lg-8">
+                        <div>
+                            <h1>
+                                Inspector Details
+                            </h1>
+                            <div class="detail">
+                              <form action="/Dashboard/AddInspectorExecute" method="post">
+                                 @Html.DropDownListFor(m => m.SelectedCandidate, Model.Candidates.Select( c => new SelectListItem { Text = c.DisplayName, Value = c.Id }))
+                                 <input type="submit" name="add" />
+                              </form>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+  
