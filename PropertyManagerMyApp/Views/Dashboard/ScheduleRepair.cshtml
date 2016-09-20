@@ -1,0 +1,170 @@
+﻿@using Newtonsoft.Json;
+@model DashboardInspectionDetailsViewModel
+
+@{
+    var repairPeopleList = Model.repairPeople.Select(x => new { label = x.DisplayName, value = x.Mail }).ToList();
+    string repairPeoplejson = JsonConvert.SerializeObject(repairPeopleList);
+}
+
+<h1>Schedule a repair</h1>
+@using (Html.BeginForm("ScheduleRepair", "Dashboard", FormMethod.Post))
+{
+    @Html.HiddenFor(m => m.incidentId)
+    <form>
+        <div class="content-row">
+            @Html.Partial("Inspection", Model)
+        </div>
+        <div class="content-row">
+            <label>Dispatcher comments</label>
+            @Html.TextArea("dispatcherComments")
+        </div>
+        <div class="schedule-repair">
+            <div class="content-row">
+                @Html.Hidden("repairPeopleSelectedValue")
+                <label for="repairPeopleSelectedValue">Repair person:</label>
+                <input id="repairPeople-autocomplete-input">
+                <span class="error-message">*</span>
+                <span id="repairPeopleImg"></span>
+            </div>
+            <div class="content-row">
+                <label class="pull-left">Date:</label>
+                <div class="fs-smaller">
+                    @System.DateTime.Now.AddDays(1).ToShortDateString()
+                </div>
+            </div>
+            <div class="content-row">
+                <label for="TimeSlots">Time:</label>
+                @Html.Hidden("timeSlotsSelectedValue")
+                @Html.Hidden("timeSlotsSelectedDateValue")
+                @Html.Hidden("timeSlotsSelectedHoursValue")
+                <select id="TimeSlots">
+                    <option>No Available Time Slots</option>
+                </select>
+                <span class="error-message">*</span>
+            </div>
+            <div class="content-row with-button">
+                <button class="pull-right button-large" id="btn_scheduleRepair">Schedule Repair</button>
+            </div>
+        </div>
+    </form>
+    <script>
+        $(function () {
+
+            $('#TimeSlots').selectmenu();
+
+            function initTimeSlots() {
+                var sel = $('#TimeSlots');
+                if (sel.length > 0) {
+                    var localDate = getTomorrowDateString();
+                    $("#timeSlotsSelectedDateValue").val(localDate)
+                    $.getJSON("/O365Calendar/GetAvailableTimeSlots?localDate=" + localDate +"&userEmail="+$( "#repairPeopleSelectedValue" ).val(), function (data) {
+                        if (data.length > 0) {
+                            sel.html('').append("<option selected value='0'>Available Time Slots</option>");
+                            for (var i = 0; i < data.length; i++) {
+                                sel.append("<option value=" + data[i].Start + ">" + data[i].Value + "</option>");
+                            }
+                            sel.change(function () {
+                                if ($(this).val() > 0) {
+                                    $("#timeSlotsSelectedHoursValue").val($(this).val())
+                                    
+                                }
+                            });
+                        }
+                        else {
+                            sel.html('').append("<option selected value='0'>No Available Time Slots</option>");
+                        }
+                        $('#TimeSlots').selectmenu('refresh');
+                    });
+                }
+            }
+
+
+            $('#btn_scheduleRepair').click(function (event) {
+                $('.error-message').hide();
+                if ($('#repairPeopleSelectedValue').val() == 0) {
+                    event.preventDefault();
+                    $('.error-message').eq(0).show();
+                }
+                if ($('#TimeSlots').val() == 0) {
+                    event.preventDefault();
+                    $('.error-message').eq(1).show();
+                }
+                else {
+                    var now = new Date(), tomorrow = (now.setDate(now.getDate() + 1), new Date(now.toDateString()));
+                    $("#timeSlotsSelectedHoursValue").val($('#TimeSlots').val())
+                }
+            });
+
+            //people auto complete
+            var repairPeopleArrays = @Html.Raw(repairPeoplejson);
+            $("#repairPeople-autocomplete-input").autocomplete({
+                source: function( request, response ) {
+                    $.ajax({
+                        url: "https://graph.microsoft.com/beta/me/people?$filter=sources/any(s:s/type eq 'Directory')",
+                        headers: { 'Content-Type': 'application/json', 'Authorization': 'Bearer '+'@TempData["accesstoken"]' },
+                        dataType: "json",
+                        data: {
+                            $search: '"'+ request.term +'"'
+                        },
+                        success: function( data ) {
+                            if(data != null && data.value != null){
+                                response( getPeopleInRepairGroup(data.value) );
+                            }
+                        }
+                    });
+                },
+                minLength: 1,
+                focus: function( event, ui ) {
+                    $( "#repairPeopleAuto" ).val( ui.item.label );
+                    return false;
+                },
+                select: function( event, ui ) {
+                    $( "#repairPeople-autocomplete-input" ).val( ui.item.label );
+                    $( "#repairPeopleSelectedValue" ).val( ui.item.value );
+
+                    var repairImg = '<img  class="ui-icon" src="' + '@Url.Action("UserPhoto", "Photo")?userId=' + ui.item.value+'">'
+                    $("#repairPeopleImg").html(repairImg)
+                    $('#TimeSlots').html("<option>Loading...</option>");
+                    $('#TimeSlots').selectmenu('refresh');
+                    initTimeSlots()
+                    return false;
+                }
+            })
+            .autocomplete("instance")._renderItem = function( ul, item ) {
+                return $( "<li>" )
+                    .append( "<a>" + item.label +"</a>" )
+                    .appendTo( ul );
+            };
+            $("#repairPeople-autocomplete-input").on( "autocompletechange", function(event,ui) {
+                if(repairPeopleArrays.map(function(e) { return e.value; }).indexOf($( "#repairPeopleSelectedValue" ).val()) == -1){
+                    $('#TimeSlots').html("<option selected value='0'>No Available Time Slots</option>");
+                    $('#TimeSlots').selectmenu('refresh');
+                }
+            });
+            function getPeopleInRepairGroup(peopleArray){
+                var retArray = new Array();
+                for(var peopleIndex in peopleArray){
+                    var displayName = peopleArray[peopleIndex].displayName;
+                    var emailAddress = peopleArray[peopleIndex].emailAddresses[0].address
+                    for(var repairPeopleIndex in repairPeopleArrays){
+                        if(emailAddress == repairPeopleArrays[repairPeopleIndex].value){
+                            retArray.push(repairPeopleArrays[repairPeopleIndex])
+                        }
+                    }
+                }
+                return retArray;
+            }
+            function getTomorrowDateString(){
+                var now = new Date(), tomorrow = new Date();
+                tomorrow.setDate(now.getDate()+1);
+                var month = '' + (tomorrow.getMonth() + 1), day = '' + tomorrow.getDate();
+                if(month.length < 2) month = '0'+ month;
+                if(day.length < 2) day = '0'+ day;
+
+                var localDate = (tomorrow.getFullYear() + "-" + month +"-" + day);
+                return localDate;
+            }
+
+        });
+    </script>
+}

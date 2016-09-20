@@ -1,0 +1,1092 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="..\packages\Microsoft.Net.Compilers.1.1.1\build\Microsoft.Net.Compilers.props" Condition="Exists('..\packages\Microsoft.Net.Compilers.1.1.1\build\Microsoft.Net.Compilers.props')" />
+  <Import Project="..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.1\build\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props" Condition="Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.1\build\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" />
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{4EB95CD2-DF10-45CB-9170-B5C871BA727D}</ProjectGuid>
+    <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>SuiteLevelWebApp</RootNamespace>
+    <AssemblyName>PropertyManagementSLA</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <UseIISExpress>true</UseIISExpress>
+    <IISExpressSSLPort>44300</IISExpressSSLPort>
+    <IISExpressAnonymousAuthentication />
+    <IISExpressWindowsAuthentication />
+    <IISExpressUseClassicPipelineMode />
+    <UseGlobalApplicationHostFile />
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
+    <TargetFrameworkProfile />
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Antlr3.Runtime, Version=3.5.0.2, Culture=neutral, PublicKeyToken=eb42632606e9261f, processorArchitecture=MSIL">
+      <HintPath>..\packages\Antlr.3.5.0.2\lib\Antlr3.Runtime.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.Activities, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
+    <Reference Include="Microsoft.Activities.Design, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
+    <Reference Include="Microsoft.AspNet.SignalR.Core, Version=2.1.2.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.SignalR.Core.2.1.2\lib\net45\Microsoft.AspNet.SignalR.Core.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.SignalR.SystemWeb, Version=2.1.2.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.SignalR.SystemWeb.2.1.2\lib\net45\Microsoft.AspNet.SignalR.SystemWeb.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.Azure.ActiveDirectory.GraphClient, Version=2.1.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Azure.ActiveDirectory.GraphClient.2.1.0\lib\portable-net4+sl5+win+wpa+wp8\Microsoft.Azure.ActiveDirectory.GraphClient.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.1\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Microsoft.Data.Edm, Version=5.7.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Data.Edm.5.7.0\lib\net40\Microsoft.Data.Edm.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.Data.OData, Version=5.7.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Data.OData.5.7.0\lib\net40\Microsoft.Data.OData.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.Data.Services.Client, Version=5.7.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Data.Services.Client.5.7.0\lib\net40\Microsoft.Data.Services.Client.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.Graph, Version=1.0.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Graph.1.0.1\lib\portable-net45+netcore45+wpa81+win8\Microsoft.Graph.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.IdentityModel.Clients.ActiveDirectory, Version=2.23.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.IdentityModel.Clients.ActiveDirectory.2.23.302261847\lib\net45\Microsoft.IdentityModel.Clients.ActiveDirectory.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.IdentityModel.Clients.ActiveDirectory.WindowsForms, Version=2.23.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.IdentityModel.Clients.ActiveDirectory.2.23.302261847\lib\net45\Microsoft.IdentityModel.Clients.ActiveDirectory.WindowsForms.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.IdentityModel.Protocol.Extensions, Version=1.0.2.33, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.IdentityModel.Protocol.Extensions.1.0.2.206221351\lib\net45\Microsoft.IdentityModel.Protocol.Extensions.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.OData.Client, Version=6.15.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.OData.Client.6.15.0\lib\net40\Microsoft.OData.Client.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.OData.Core, Version=6.15.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.OData.Core.6.15.0\lib\portable-net45+win+wpa81\Microsoft.OData.Core.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.OData.Edm, Version=6.15.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.OData.Edm.6.15.0\lib\portable-net45+win+wpa81\Microsoft.OData.Edm.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.OData.ProxyExtensions, Version=1.0.35.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.OData.ProxyExtensions.1.0.35\lib\portable-net45+win+wpa81+wp80+MonoAndroid10+xamarinios10+MonoTouch10\Microsoft.OData.ProxyExtensions.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.Office365.Discovery, Version=1.0.22.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Office365.Discovery.1.0.22\lib\portable-net40+sl5+wp8+win8+MonoAndroid10+MonoTouch10+WindowsPhoneApp81\Microsoft.Office365.Discovery.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.Office365.SharePoint, Version=1.0.22.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Office365.SharePoint.1.0.22\lib\net40\Microsoft.Office365.SharePoint.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.Online.SharePoint.Client.Tenant, Version=16.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>Assemblies\Microsoft.Online.SharePoint.Client.Tenant.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin, Version=3.0.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Owin.3.0.1\lib\net45\Microsoft.Owin.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Host.SystemWeb, Version=3.0.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Owin.Host.SystemWeb.3.0.1\lib\net45\Microsoft.Owin.Host.SystemWeb.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security, Version=3.0.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Owin.Security.3.0.1\lib\net45\Microsoft.Owin.Security.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security.Cookies, Version=3.0.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Owin.Security.Cookies.3.0.1\lib\net45\Microsoft.Owin.Security.Cookies.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security.OpenIdConnect, Version=3.0.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Owin.Security.OpenIdConnect.3.0.1\lib\net45\Microsoft.Owin.Security.OpenIdConnect.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.SharePoint.Client, Version=16.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Sharepoint.2013.Client.16.1.0.0\lib\Microsoft.SharePoint.Client.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.SharePoint.Client.Runtime, Version=16.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Sharepoint.2013.Client.16.1.0.0\lib\Microsoft.SharePoint.Client.Runtime.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.SharePoint.Client.WorkflowServices, Version=15.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c, processorArchitecture=MSIL">
+      <HintPath>..\packages\SharePoint.Client.WorkflowServices.15.0.0\lib\Microsoft.SharePoint.Client.WorkflowServices\Microsoft.SharePoint.Client.WorkflowServices.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.SharePoint.DesignTime.Activities.16.0, Version=14.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
+    <Reference Include="Microsoft.SharePoint.DesignTime.Activities.16.0.Design, Version=14.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
+    <Reference Include="Microsoft.Spatial, Version=6.15.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Spatial.6.15.0\lib\portable-net45+win+wpa81\Microsoft.Spatial.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.Workflow.Common, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>Assemblies\Microsoft.Workflow.Common.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=8.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.8.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Owin, Version=1.0.0.0, Culture=neutral, PublicKeyToken=f0ebd12fd5e55cc5, processorArchitecture=MSIL">
+      <HintPath>..\packages\Owin.1.0\lib\net40\Owin.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="RazorEngine, Version=3.7.7.0, Culture=neutral, PublicKeyToken=9ee697374c7e744a, processorArchitecture=MSIL">
+      <HintPath>..\packages\RazorEngine.3.7.7\lib\net45\RazorEngine.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.IdentityModel" />
+    <Reference Include="System.IdentityModel.Tokens.Jwt, Version=4.0.30826.1200, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.IdentityModel.Tokens.Jwt.4.0.3.308261200\lib\net45\System.IdentityModel.Tokens.Jwt.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Net.Http.Formatting, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Client.5.2.3\lib\net45\System.Net.Http.Formatting.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Net.Http.WebRequest" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Spatial, Version=5.7.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Spatial.5.7.0\lib\net40\System.Spatial.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.Abstractions" />
+    <Reference Include="System.Web.DynamicData" />
+    <Reference Include="System.Web.Entity" />
+    <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Http, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Core.5.2.3\lib\net45\System.Web.Http.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.Http.WebHost, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.WebHost.5.2.3\lib\net45\System.Web.Http.WebHost.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.Optimization, Version=1.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Web.Optimization.1.1.3\lib\net40\System.Web.Optimization.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.Routing" />
+    <Reference Include="System.Xaml" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.EnterpriseServices" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="WebGrease, Version=1.6.5135.21930, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\WebGrease.1.6.0\lib\WebGrease.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="System.Web.Razor">
+      <HintPath>..\packages\Microsoft.AspNet.Razor.3.2.3\lib\net45\System.Web.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Webpages">
+      <HintPath>..\packages\Microsoft.AspNet.Webpages.3.2.3\lib\net45\System.Web.Webpages.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Webpages.Deployment">
+      <HintPath>..\packages\Microsoft.AspNet.Webpages.3.2.3\lib\net45\System.Web.Webpages.Deployment.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Webpages.Razor">
+      <HintPath>..\packages\Microsoft.AspNet.Webpages.3.2.3\lib\net45\System.Web.Webpages.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Helpers">
+      <HintPath>..\packages\Microsoft.AspNet.Webpages.3.2.3\lib\net45\System.Web.Helpers.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Web.Infrastructure">
+      <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Mvc">
+      <HintPath>..\packages\Microsoft.AspNet.Mvc.5.2.3\lib\net45\System.Web.Mvc.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="App_Data\Notifications.xml" />
+    <Content Include="Assemblies\Microsoft.Online.SharePoint.Client.Tenant.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Assemblies\Microsoft.Workflow.Common.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="components\Breadcrumb\Breadcrumb.html" />
+    <Content Include="components\Button\Button.Command.html" />
+    <Content Include="components\Button\Button.Compound.html" />
+    <Content Include="components\Button\Button.Hero.html" />
+    <Content Include="components\Button\Button.html" />
+    <Content Include="components\Button\Button.Primary.html" />
+    <Content Include="components\Callout\Callout.ActionText.html" />
+    <Content Include="components\Callout\Callout.Close.html" />
+    <Content Include="components\Callout\Callout.html" />
+    <Content Include="components\Callout\Callout.Oobe.html" />
+    <Content Include="components\Callout\Callout.Peek.html" />
+    <Content Include="components\ChoiceField\ChoiceField.Checkbox.Disabled.html" />
+    <Content Include="components\ChoiceField\ChoiceField.Checkbox.html" />
+    <Content Include="components\ChoiceField\ChoiceField.Checkbox.Selected.html" />
+    <Content Include="components\ChoiceField\ChoiceField.ChoiceFieldGroup.html" />
+    <Content Include="components\ChoiceField\ChoiceField.Disabled.html" />
+    <Content Include="components\ChoiceField\ChoiceField.html" />
+    <Content Include="components\ChoiceField\ChoiceField.Selected.html" />
+    <Content Include="components\CommandBar\CommandBar.html" />
+    <Content Include="components\CommandBar\Jquery.CommandBar.js" />
+    <Content Include="components\ContextualMenu\ContextualMenu.Dividers.html" />
+    <Content Include="components\ContextualMenu\ContextualMenu.html" />
+    <Content Include="components\ContextualMenu\ContextualMenu.Multiselect.html" />
+    <Content Include="components\ContextualMenu\ContextualMenu.SubMenu.html" />
+    <Content Include="components\ContextualMenu\Jquery.ContextualMenu.js" />
+    <Content Include="components\DatePicker\DatePicker.html" />
+    <Content Include="components\DatePicker\Jquery.DatePicker.js" />
+    <Content Include="components\DatePicker\PickaDate.js" />
+    <Content Include="components\Dialog\Dialog.Close.html" />
+    <Content Include="components\Dialog\Dialog.html" />
+    <Content Include="components\Dialog\Dialog.LgHeader.html" />
+    <Content Include="components\Dialog\Dialog.Multiline.html" />
+    <Content Include="components\Dropdown\Dropdown.Disabled.html" />
+    <Content Include="components\Dropdown\Dropdown.html" />
+    <Content Include="components\Dropdown\Jquery.Dropdown.js" />
+    <Content Include="components\Label\Label.Disabled.html" />
+    <Content Include="components\Label\Label.html" />
+    <Content Include="components\Label\Label.Required.html" />
+    <Content Include="components\Link\Link.Hero.html" />
+    <Content Include="components\Link\Link.html" />
+    <Content Include="components\ListItem\Jquery.ListItem.js" />
+    <Content Include="components\ListItem\ListItem.Document.html" />
+    <Content Include="components\ListItem\ListItem.html" />
+    <Content Include="components\ListItem\ListItem.Image.html" />
+    <Content Include="components\ListItem\ListItem.Selectable.html" />
+    <Content Include="components\ListItem\ListItem.Selected.html" />
+    <Content Include="components\ListItem\ListItem.Unread.html" />
+    <Content Include="components\ListItem\ListItem.Unseen.html" />
+    <Content Include="components\List\List.Grid.html" />
+    <Content Include="components\List\List.html" />
+    <Content Include="components\NavBar\Jquery.NavBar.js" />
+    <Content Include="components\NavBar\NavBar.html" />
+    <Content Include="components\OrgChart\OrgChart.html" />
+    <Content Include="components\OrgChart\OrgChart.Square.html" />
+    <Content Include="components\Overlay\Overlay.Dark.html" />
+    <Content Include="components\Overlay\Overlay.html" />
+    <Content Include="components\Overlay\Overlay.None.html" />
+    <Content Include="components\Panel\Jquery.Panel.js" />
+    <Content Include="components\Panel\Panel.ExtraLarge.html" />
+    <Content Include="components\Panel\Panel.html" />
+    <Content Include="components\Panel\Panel.Large.html" />
+    <Content Include="components\Panel\Panel.Medium.html" />
+    <Content Include="components\PeoplePicker\Jquery.PeoplePicker.js" />
+    <Content Include="components\PeoplePicker\PeoplePicker.Compact.html" />
+    <Content Include="components\PeoplePicker\PeoplePicker.Disconnected.html" />
+    <Content Include="components\PeoplePicker\PeoplePicker.FacePile.html" />
+    <Content Include="components\PeoplePicker\PeoplePicker.html" />
+    <Content Include="components\PeoplePicker\PeoplePicker.Searching.png" />
+    <Content Include="components\PersonaCard\Jquery.PersonaCard.js" />
+    <Content Include="components\PersonaCard\PersonaCard.html" />
+    <Content Include="components\PersonaCard\PersonaCard.Square.html" />
+    <Content Include="components\Persona\Persona.ExtraLarge.html" />
+    <Content Include="components\Persona\Persona.ExtraSmall.html" />
+    <Content Include="components\Persona\Persona.html" />
+    <Content Include="components\Persona\Persona.Large.html" />
+    <Content Include="components\Persona\Persona.Person.jpg" />
+    <Content Include="components\Persona\Persona.Person2.png" />
+    <Content Include="components\Persona\Persona.Presence.Available.html" />
+    <Content Include="components\Persona\Persona.Presence.Away.html" />
+    <Content Include="components\Persona\Persona.Presence.Blocked.html" />
+    <Content Include="components\Persona\Persona.Presence.Busy.html" />
+    <Content Include="components\Persona\Persona.Presence.Dnd.html" />
+    <Content Include="components\Persona\Persona.Presence.Offline.html" />
+    <Content Include="components\Persona\Persona.Presence.Square.Available.html" />
+    <Content Include="components\Persona\Persona.Presence.Square.Away.html" />
+    <Content Include="components\Persona\Persona.Presence.Square.Blocked.html" />
+    <Content Include="components\Persona\Persona.Presence.Square.Busy.html" />
+    <Content Include="components\Persona\Persona.Presence.Square.Dnd.html" />
+    <Content Include="components\Persona\Persona.Presence.Square.Offline.html" />
+    <Content Include="components\Persona\Persona.Small.html" />
+    <Content Include="components\Persona\Persona.Square.ExtraLarge.html" />
+    <Content Include="components\Persona\Persona.Square.ExtraSmall.html" />
+    <Content Include="components\Persona\Persona.Square.html" />
+    <Content Include="components\Persona\Persona.Square.Large.html" />
+    <Content Include="components\Persona\Persona.Square.Small.html" />
+    <Content Include="components\Persona\Persona.Square.Tiny.html" />
+    <Content Include="components\Persona\Persona.Tiny.html" />
+    <Content Include="components\Pivot\jquery.Pivot.js" />
+    <Content Include="components\Pivot\Pivot.html" />
+    <Content Include="components\Pivot\Pivot.Large.html" />
+    <Content Include="components\Pivot\Pivot.Tabs.html" />
+    <Content Include="components\Pivot\Pivot.Tabs.Large.html" />
+    <Content Include="components\ProgressIndicator\ProgressIndicator.html" />
+    <Content Include="components\ProgressIndicator\ProgressIndicator.js" />
+    <Content Include="components\SearchBox\Jquery.SearchBox.js" />
+    <Content Include="components\SearchBox\SearchBox.html" />
+    <Content Include="components\Spinner\Spinner.html" />
+    <Content Include="components\Spinner\Spinner.js" />
+    <Content Include="components\Table\Table.html" />
+    <Content Include="components\TextField\Jquery.TextField.js" />
+    <Content Include="components\TextField\TextField.html" />
+    <Content Include="components\TextField\TextField.Multiline.html" />
+    <Content Include="components\TextField\TextField.Placeholder.html" />
+    <Content Include="components\TextField\TextField.Underlined.html" />
+    <Content Include="components\Toggle\Toggle.html" />
+    <Content Include="components\Toggle\Toggle.TextLeft.html" />
+    <Content Include="Content\bootstrap-theme.css" />
+    <Content Include="Content\bootstrap-theme.min.css" />
+    <Content Include="Content\bootstrap.css" />
+    <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\contoso.css" />
+    <Content Include="Content\Fonts\Bootstrap\glyphicons-halflings-regular.svg" />
+    <Content Include="Content\Fonts\Office365-Icons\fonts\icomoon.svg" />
+    <Content Include="Content\Fonts\Office365-Icons\Read Me.txt" />
+    <Content Include="Content\Fonts\Office365-Icons\style.css" />
+    <Content Include="Content\Fonts\Segoe-UI-Bold-Italic\3fa09cba-69f7-4b32-8f5f-f0af92543523-4.svg" />
+    <Content Include="Content\Fonts\Segoe-UI-Bold-Italic\custom-text.txt" />
+    <Content Include="Content\Fonts\Segoe-UI-Bold-Italic\demo.htm" />
+    <Content Include="Content\Fonts\Segoe-UI-Bold\custom-text.txt" />
+    <Content Include="Content\Fonts\Segoe-UI-Bold\demo.htm" />
+    <Content Include="Content\Fonts\Segoe-UI-Bold\f5dd91f1-2016-48f8-a46c-e3418a52c859-4.svg" />
+    <Content Include="Content\Fonts\Segoe-UI-Italic\05577455-4c3f-4f49-a71e-2c5b3055ec53-4.svg" />
+    <Content Include="Content\Fonts\Segoe-UI-Italic\custom-text.txt" />
+    <Content Include="Content\Fonts\Segoe-UI-Italic\demo.htm" />
+    <Content Include="Content\Fonts\Segoe-UI-Light-Italic\custom-text.txt" />
+    <Content Include="Content\Fonts\Segoe-UI-Light-Italic\demo.htm" />
+    <Content Include="Content\Fonts\Segoe-UI-Light-Italic\e23dde0e-e91f-41e0-b78c-ebb9e232e98d-4.svg" />
+    <Content Include="Content\Fonts\Segoe-UI-Light\45a13f65-5199-4a22-821e-9b7d7795518e-4.svg" />
+    <Content Include="Content\Fonts\Segoe-UI-Light\custom-text.txt" />
+    <Content Include="Content\Fonts\Segoe-UI-Light\demo.htm" />
+    <Content Include="Content\Fonts\Segoe-UI-Semibold-Italic\191748c9-7f55-43c3-a9c3-467cf18f896a-4.svg" />
+    <Content Include="Content\Fonts\Segoe-UI-Semibold-Italic\custom-text.txt" />
+    <Content Include="Content\Fonts\Segoe-UI-Semibold-Italic\demo.htm" />
+    <Content Include="Content\Fonts\Segoe-UI-Semibold\afae52c9-5d08-4193-8984-bb4346fd493c-4.svg" />
+    <Content Include="Content\Fonts\Segoe-UI-Semibold\custom-text.txt" />
+    <Content Include="Content\Fonts\Segoe-UI-Semibold\demo.htm" />
+    <Content Include="Content\Fonts\Segoe-UI-Semilight-Italic\b01764d0-636e-4ff9-b1fb-4137a1a836aa-4.svg" />
+    <Content Include="Content\Fonts\Segoe-UI-Semilight-Italic\custom-text.txt" />
+    <Content Include="Content\Fonts\Segoe-UI-Semilight-Italic\demo.htm" />
+    <Content Include="Content\Fonts\Segoe-UI-Semilight\b692a79e-1bc5-4bcd-b355-7be3ef969fb7-4.svg" />
+    <Content Include="Content\Fonts\Segoe-UI-Semilight\custom-text.txt" />
+    <Content Include="Content\Fonts\Segoe-UI-Semilight\demo.htm" />
+    <Content Include="Content\Fonts\Segoe-UI\3ca1af51-981a-4e1c-b9c6-a66d0a5fe3c0-4.svg" />
+    <Content Include="Content\Fonts\Segoe-UI\custom-text.txt" />
+    <Content Include="Content\Fonts\Segoe-UI\demo.htm" />
+    <Content Include="Content\iconAttribution.css" />
+    <Content Include="Content\Images\AADAppLogos\logo-prop-man.jpg" />
+    <Content Include="Content\Images\AADAppLogos\logo-prop-man.png" />
+    <Content Include="Content\Images\broken-window1.jpg" />
+    <Content Include="Content\Images\btn-icon-1.png" />
+    <Content Include="Content\Images\btn-icon-2.png" />
+    <Content Include="Content\Images\contoso-logo.png" />
+    <Content Include="Content\Images\DefaultUserPhoto.jpg" />
+    <Content Include="Content\Images\gray-bg.png" />
+    <Content Include="Content\Images\ico-add.png" />
+    <Content Include="Content\Images\ico-at.png" />
+    <Content Include="Content\Images\ico-attention.png" />
+    <Content Include="Content\Images\ico-battery.png" />
+    <Content Include="Content\Images\ico-calendar.png" />
+    <Content Include="Content\Images\ico-camera.png" />
+    <Content Include="Content\Images\ico-cancel.png" />
+    <Content Include="Content\Images\ico-comments.png" />
+    <Content Include="Content\Images\ico-electric.png" />
+    <Content Include="Content\Images\ico-faucet.png" />
+    <Content Include="Content\Images\ico-finalize.png" />
+    <Content Include="Content\Images\ico-home.png" />
+    <Content Include="Content\Images\ico-inspect.png" />
+    <Content Include="Content\Images\ico-location.png" />
+    <Content Include="Content\Images\ico-office-contact.png" />
+    <Content Include="Content\Images\ico-owner.png" />
+    <Content Include="Content\Images\ico-plus.png" />
+    <Content Include="Content\Images\ico-repair.png" />
+    <Content Include="Content\Images\ico-rooms.png" />
+    <Content Include="Content\Images\ico-search.png" />
+    <Content Include="Content\Images\ico-settings.png" />
+    <Content Include="Content\Images\ico-stove.png" />
+    <Content Include="Content\Images\ico-structure.png" />
+    <Content Include="Content\Images\ico-warning.png" />
+    <Content Include="Content\Images\ico-wifi.png" />
+    <Content Include="Content\Images\incident.jpg" />
+    <Content Include="Content\Images\iOS App AAD Perms.png" />
+    <Content Include="Content\Images\iOS App Exchange Perms.png" />
+    <Content Include="Content\Images\iOS App SP Perms.png" />
+    <Content Include="Content\Images\loading.gif" />
+    <Content Include="Content\Images\logo-prop-main.jpg" />
+    <Content Include="Content\Images\logo-prop-main.png" />
+    <Content Include="Content\Images\logo_office.png" />
+    <Content Include="Content\Images\Mail AFO - Admin.png" />
+    <Content Include="Content\Images\Mail AFO - Incident Details.png" />
+    <Content Include="Content\Images\Mail AFO - Link.png" />
+    <Content Include="Content\Images\Mail AFO - Redir.png" />
+    <Content Include="Content\Images\O365 API AD Permissions.jpg" />
+    <Content Include="Content\Images\O365 API Calendar Permissions.jpg" />
+    <Content Include="Content\Images\O365 API Mail Permissions.jpg" />
+    <Content Include="Content\Images\O365 API Permissions.jpg" />
+    <Content Include="Content\Images\O365 API Sites Permissions.jpg" />
+    <Content Include="Content\Images\O365 App Settings.jpg" />
+    <Content Include="Content\Images\orange-bg.png" />
+    <Content Include="Content\Images\people\Alisa Lawyer.jpg" />
+    <Content Include="Content\Images\people\Chris Gray.jpg" />
+    <Content Include="Content\Images\people\Katie Jordan.jpg" />
+    <Content Include="Content\Images\people\Margaret Au.jpg" />
+    <Content Include="Content\Images\people\Rob Barker.jpg" />
+    <Content Include="Content\Images\people\Ron Gabel.jpg" />
+    <Content Include="Content\Images\people\Steven Wright.jpg" />
+    <Content Include="Content\Images\properties\house1.jpg" />
+    <Content Include="Content\Images\properties\house2.jpg" />
+    <Content Include="Content\Images\properties\house3.jpg" />
+    <Content Include="Content\Images\properties\house4.jpg" />
+    <Content Include="Content\Images\properties\house5.jpg" />
+    <Content Include="Content\Images\property1Incidents\broken-disposal.JPG" />
+    <Content Include="Content\Images\property1Incidents\broken-window-1.jpg" />
+    <Content Include="Content\Images\property1Incidents\broken-window-10.jpg" />
+    <Content Include="Content\Images\property1Incidents\broken-window-11.jpg" />
+    <Content Include="Content\Images\property1Incidents\broken-window-12.jpg" />
+    <Content Include="Content\Images\property1Incidents\broken-window-13.jpg" />
+    <Content Include="Content\Images\property1Incidents\broken-window-14.jpg" />
+    <Content Include="Content\Images\property1Incidents\broken-window-15.jpg" />
+    <Content Include="Content\Images\property1Incidents\broken-window-2.jpg" />
+    <Content Include="Content\Images\property1Incidents\broken-window-3.jpg" />
+    <Content Include="Content\Images\property1Incidents\broken-window-4.jpg" />
+    <Content Include="Content\Images\property1Incidents\broken-window-5.jpg" />
+    <Content Include="Content\Images\property1Incidents\broken-window-6.jpg" />
+    <Content Include="Content\Images\property1Incidents\broken-window-7.jpg" />
+    <Content Include="Content\Images\property1Incidents\broken-window-8.jpg" />
+    <Content Include="Content\Images\property1Incidents\broken-window-9.jpg" />
+    <Content Include="Content\Images\property1Incidents\broken-window.jpg" />
+    <Content Include="Content\Images\property1Incidents\leaky-faucet.JPG" />
+    <Content Include="Content\Images\property1Repairs\fixed sink.jpeg" />
+    <Content Include="Content\Images\property1Repairs\fixed-disposal.jpeg" />
+    <Content Include="Content\Images\property1Repairs\fixed-window.jpg" />
+    <Content Include="Content\Images\property1Rooms\bathroom 1.jpg" />
+    <Content Include="Content\Images\property1Rooms\bathroom 2.jpg" />
+    <Content Include="Content\Images\property1Rooms\bedroom 1.jpg" />
+    <Content Include="Content\Images\property1Rooms\bedroom 2.jpg" />
+    <Content Include="Content\Images\property1Rooms\dining room.png" />
+    <Content Include="Content\Images\property1Rooms\kitchen.jpg" />
+    <Content Include="Content\Images\property1Rooms\living room.jpg" />
+    <Content Include="Content\Images\property2Rooms\foyer.JPG" />
+    <Content Include="Content\Images\property2Rooms\guest bedroom.jpg" />
+    <Content Include="Content\Images\property2Rooms\kitchenette.JPG" />
+    <Content Include="Content\Images\property2Rooms\laundry room.jpg" />
+    <Content Include="Content\Images\property2Rooms\lower bathroom.jpg" />
+    <Content Include="Content\Images\property2Rooms\master bedroom.png" />
+    <Content Include="Content\Images\property2Rooms\upper bathroom.jpg" />
+    <Content Include="Content\Images\topbar-left.png" />
+    <Content Include="Content\Images\topbar-right.png" />
+    <Content Include="Content\mailAFO.css" />
+    <Content Include="Content\Office.css" />
+    <Content Include="Content\SampleData.xml">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Content\Site.css" />
+    <Content Include="Content\themes\base\core.css" />
+    <Content Include="Content\themes\base\datepicker.css" />
+    <Content Include="Content\themes\base\images\ui-bg_flat_0_aaaaaa_40x100.png" />
+    <Content Include="Content\themes\base\images\ui-bg_flat_75_ffffff_40x100.png" />
+    <Content Include="Content\themes\base\images\ui-bg_glass_55_fbf9ee_1x400.png" />
+    <Content Include="Content\themes\base\images\ui-bg_glass_65_ffffff_1x400.png" />
+    <Content Include="Content\themes\base\images\ui-bg_glass_75_dadada_1x400.png" />
+    <Content Include="Content\themes\base\images\ui-bg_glass_75_e6e6e6_1x400.png" />
+    <Content Include="Content\themes\base\images\ui-bg_glass_95_fef1ec_1x400.png" />
+    <Content Include="Content\themes\base\images\ui-bg_highlight-soft_75_cccccc_1x100.png" />
+    <Content Include="Content\themes\base\images\ui-icons_222222_256x240.png" />
+    <Content Include="Content\themes\base\images\ui-icons_2e83ff_256x240.png" />
+    <Content Include="Content\themes\base\images\ui-icons_454545_256x240.png" />
+    <Content Include="Content\themes\base\images\ui-icons_888888_256x240.png" />
+    <Content Include="Content\themes\base\images\ui-icons_cd0a0a_256x240.png" />
+    <Content Include="Content\themes\base\theme.css" />
+    <Content Include="Content\Videos\LeakyFaucet[4].mp4" />
+    <Content Include="css\fabric.components.css" />
+    <Content Include="css\fabric.components.min.css" />
+    <Content Include="css\fabric.components.rtl.css" />
+    <Content Include="css\fabric.components.rtl.min.css" />
+    <Content Include="css\fabric.css" />
+    <Content Include="css\fabric.min.css" />
+    <Content Include="css\fabric.rtl.css" />
+    <Content Include="css\fabric.rtl.min.css" />
+    <Content Include="fabric.components.css" />
+    <Content Include="fabric.components.min.css" />
+    <Content Include="fabric.components.rtl.css" />
+    <Content Include="fabric.components.rtl.min.css" />
+    <Content Include="fabric.css" />
+    <Content Include="fabric.min.css" />
+    <Content Include="fabric.rtl.css" />
+    <Content Include="fabric.rtl.min.css" />
+    <Content Include="Global.asax" />
+    <Content Include="Scripts\bootstrap.js" />
+    <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="components\Breadcrumb\Breadcrumb.json" />
+    <Content Include="components\Breadcrumb\Breadcrumb.less" />
+    <Content Include="components\Button\Button.json" />
+    <Content Include="components\Button\Button.less" />
+    <Content Include="components\Callout\Callout.json" />
+    <Content Include="components\Callout\Callout.less" />
+    <Content Include="components\ChoiceField\ChoiceField.json" />
+    <Content Include="components\ChoiceField\ChoiceField.less" />
+    <Content Include="components\CommandBar\CommandBar.json" />
+    <Content Include="components\CommandBar\CommandBar.less" />
+    <Content Include="components\ContextualMenu\ContextualMenu.json" />
+    <Content Include="components\ContextualMenu\ContextualMenu.less" />
+    <Content Include="components\DatePicker\DatePicker.json" />
+    <Content Include="components\DatePicker\DatePicker.less" />
+    <Content Include="components\Dialog\Dialog.json" />
+    <Content Include="components\Dialog\Dialog.less" />
+    <Content Include="components\Dropdown\Dropdown.json" />
+    <Content Include="components\Dropdown\Dropdown.less" />
+    <Content Include="components\Label\Label.json" />
+    <Content Include="components\Label\Label.less" />
+    <Content Include="components\Link\Link.json" />
+    <Content Include="components\Link\Link.less" />
+    <Content Include="components\ListItem\ListItem.json" />
+    <Content Include="components\ListItem\ListItem.less" />
+    <Content Include="components\List\List.json" />
+    <Content Include="components\List\List.less" />
+    <Content Include="components\NavBar\NavBar.json" />
+    <Content Include="components\NavBar\NavBar.less" />
+    <Content Include="components\OrgChart\OrgChart.json" />
+    <Content Include="components\OrgChart\OrgChart.less" />
+    <Content Include="components\Overlay\Overlay.json" />
+    <Content Include="components\Overlay\Overlay.less" />
+    <Content Include="components\Panel\Panel.json" />
+    <Content Include="components\Panel\Panel.less" />
+    <Content Include="components\PeoplePicker\PeoplePicker.json" />
+    <Content Include="components\PeoplePicker\PeoplePicker.less" />
+    <Content Include="components\PersonaCard\PersonaCard.json" />
+    <Content Include="components\PersonaCard\PersonaCard.less" />
+    <Content Include="components\Persona\Persona.json" />
+    <Content Include="components\Persona\Persona.less" />
+    <Content Include="components\Pivot\Pivot.json" />
+    <Content Include="components\Pivot\Pivot.less" />
+    <Content Include="components\ProgressIndicator\ProgressIndicator.json" />
+    <Content Include="components\ProgressIndicator\ProgressIndicator.less" />
+    <Content Include="components\SearchBox\SearchBox.json" />
+    <Content Include="components\SearchBox\SearchBox.less" />
+    <Content Include="components\Spinner\Spinner.json" />
+    <Content Include="components\Spinner\Spinner.less" />
+    <Content Include="components\Table\Table.json" />
+    <Content Include="components\Table\Table.less" />
+    <Content Include="components\TextField\TextField.json" />
+    <Content Include="components\TextField\TextField.less" />
+    <Content Include="components\Toggle\Toggle.json" />
+    <Content Include="components\Toggle\Toggle.less" />
+    <Content Include="Content\Workbooks\Property1\Property-Costs.xlsx" />
+    <Content Include="Content\Workbooks\Property2\Property-Costs.xlsx" />
+    <Content Include="Content\Workbooks\Property3\Property-Costs.xlsx" />
+    <Content Include="Content\Workbooks\Property4\Property-Costs.xlsx" />
+    <Content Include="Content\Workbooks\Property5\Property-Costs.xlsx" />
+    <Content Include="components\PersonaCard\PersonaCard.scss" />
+    <None Include="Properties\PublishProfiles\promantest %282%29.pubxml" />
+    <None Include="Properties\PublishProfiles\promantest.pubxml" />
+    <Content Include="sass\_Office.Color.Variables.scss" />
+    <Content Include="sass\_Fabric.ZIndex.Variables.scss" />
+    <Content Include="sass\_Fabric.Utilities.scss" />
+    <Content Include="sass\_Fabric.Typography.Variables.scss" />
+    <Content Include="sass\_Fabric.Typography.scss" />
+    <Content Include="sass\_Fabric.Typography.Language.Overrides.scss" />
+    <Content Include="sass\_Fabric.Typography.Fonts.scss" />
+    <Content Include="sass\_Fabric.Responsive.Variables.scss" />
+    <Content Include="sass\_Fabric.Responsive.Utilities.Variables.scss" />
+    <Content Include="sass\_Fabric.Mixins.scss" />
+    <Content Include="sass\_Fabric.Icons.scss" />
+    <Content Include="sass\_Fabric.Grid.scss" />
+    <Content Include="sass\_Fabric.Common.scss" />
+    <Content Include="sass\_Fabric.Color.Variables.scss" />
+    <Content Include="sass\_Fabric.Color.Mixins.scss" />
+    <Content Include="sass\_Fabric.Animations.scss" />
+    <Content Include="sass\_Fabric.Animations.RTL.scss" />
+    <Content Include="sass\Fabric.Utilities.Output.scss" />
+    <Content Include="sass\Fabric.Typography.Output.scss" />
+    <Content Include="sass\Fabric.Typography.Language.Overrides.Output.scss" />
+    <Content Include="sass\Fabric.Typography.Fonts.Output.scss" />
+    <Content Include="sass\Fabric.scss" />
+    <Content Include="sass\Fabric.RTL.scss" />
+    <Content Include="sass\Fabric.Responsive.Utilities.Output.scss" />
+    <Content Include="sass\Fabric.Icons.RTL.Output.scss" />
+    <Content Include="sass\Fabric.Icons.Output.scss" />
+    <Content Include="sass\Fabric.Icons.Font.Output.scss" />
+    <Content Include="sass\Fabric.Grid.Output.scss" />
+    <Content Include="sass\Fabric.Components.scss" />
+    <Content Include="sass\Fabric.Color.Mixins.Output.scss" />
+    <Content Include="sass\Fabric.Animations.RTL.Output.scss" />
+    <Content Include="sass\Fabric.Animations.Output.scss" />
+    <None Include="Scripts\jquery-2.1.1.intellisense.js" />
+    <Content Include="Scripts\jquery-2.1.1.js" />
+    <Content Include="Scripts\jquery-2.1.1.min.js" />
+    <Content Include="Scripts\jquery-ui-1.11.2.js" />
+    <Content Include="Scripts\jquery-ui-1.11.2.min.js" />
+    <None Include="Scripts\jquery.validate-vsdoc.js" />
+    <Content Include="Scripts\jquery.signalR-2.1.2.js" />
+    <Content Include="Scripts\jquery.signalR-2.1.2.min.js" />
+    <Content Include="Scripts\jquery.validate.js" />
+    <Content Include="Scripts\jquery.validate.min.js" />
+    <Content Include="Scripts\jquery.validate.unobtrusive.js" />
+    <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
+    <Content Include="Scripts\modernizr-2.8.3.js" />
+    <Content Include="Scripts\Office\1.1\access-web-16.00.debug.js" />
+    <Content Include="Scripts\Office\1.1\access-web-16.00.js" />
+    <Content Include="Scripts\Office\1.1\ar-sa\office_strings.debug.js" />
+    <Content Include="Scripts\Office\1.1\ar-sa\office_strings.js" />
+    <Content Include="Scripts\Office\1.1\ar-sa\outlook_strings.debug.js" />
+    <Content Include="Scripts\Office\1.1\ar-sa\outlook_strings.js" />
+    <Content Include="Scripts\Office\1.1\bg-bg\office_strings.debug.js" />
+    <Content Include="Scripts\Office\1.1\bg-bg\office_strings.js" />
+    <Content Include="Scripts\Office\1.1\bg-bg\outlook_strings.debug.js" />
+    <Content Include="Scripts\Office\1.1\bg-bg\outlook_strings.js" />
+    <Content Include="Scripts\Office\1.1\cs-cz\office_strings.debug.js" />
+    <Content Include="Scripts\Office\1.1\cs-cz\office_strings.js" />
+    <Content Include="Scripts\Office\1.1\cs-cz\outlook_strings.debug.js" />
+    <Content Include="Scripts\Office\1.1\cs-cz\outlook_strings.js" />
+    <Content Include="Scripts\Office\1.1\da-dk\office_strings.debug.js" />
+    <Content Include="Scripts\Office\1.1\da-dk\office_strings.js" />
+    <Content Include="Scripts\Office\1.1\da-dk\outlook_strings.debug.js" />
+    <Content Include="Scripts\Office\1.1\da-dk\outlook_strings.js" />
+    <Content Include="Scripts\Office\1.1\de-de\office_strings.debug.js" />
+    <Content Include="Scripts\Office\1.1\de-de\office_strings.js" />
+    <Content Include="Scripts\Office\1.1\de-de\outlook_strings.debug.js" />
+    <Content Include="Scripts\Office\1.1\de-de\outlook_strings.js" />
+    <Content Include="Scripts\Office\1.1\el-gr\office_strings.debug.js" />
+    <Content Include="Scripts\Office\1.1\el-gr\office_strings.js" />
+    <Content Include="Scripts\Office\1.1\el-gr\outlook_strings.debug.js" />
+    <Content Include="Scripts\Office\1.1\el-gr\outlook_strings.js" />
+    <Content Include="Scripts\Office\1.1\en-us\office_strings.debug.js" />
+    <Content Include="Scripts\Office\1.1\en-us\office_strings.js" />
+    <Content Include="Scripts\Office\1.1\en-us\outlook_strings.debug.js" />
+    <Content Include="Scripts\Office\1.1\en-us\outlook_strings.js" />
+    <Content Include="Scripts\Office\1.1\es-es\office_strings.debug.js" />
+    <Content Include="Scripts\Office\1.1\es-es\office_strings.js" />
+    <Content Include="Scripts\Office\1.1\es-es\outlook_strings.debug.js" />
+    <Content Include="Scripts\Office\1.1\es-es\outlook_strings.js" />
+    <Content Include="Scripts\Office\1.1\et-ee\office_strings.debug.js" />
+    <Content Include="Scripts\Office\1.1\et-ee\office_strings.js" />
+    <Content Include="Scripts\Office\1.1\et-ee\outlook_strings.debug.js" />
+    <Content Include="Scripts\Office\1.1\et-ee\outlook_strings.js" />
+    <Content Include="Scripts\Office\1.1\excel-15.01.debug.js" />
+    <Content Include="Scripts\Office\1.1\excel-15.01.js" />
+    <Content Include="Scripts\Office\1.1\excel-15.debug.js" />
+    <Content Include="Scripts\Office\1.1\excel-15.js" />
+    <Content Include="Scripts\Office\1.1\excel-web-16.00.debug.js" />
+    <Content Include="Scripts\Office\1.1\excel-web-16.00.js" />
+    <Content Include="Scripts\Office\1.1\excel-win32-16.00.debug.js" />
+    <Content Include="Scripts\Office\1.1\excel-win32-16.00.js" />
+    <Content Include="Scripts\Office\1.1\excelwebapp-15.01.debug.js" />
+    <Content Include="Scripts\Office\1.1\excelwebapp-15.01.js" />
+    <Content Include="Scripts\Office\1.1\excelwebapp-15.debug.js" />
+    <Content Include="Scripts\Office\1.1\excelwebapp-15.js" />
+    <Content Include="Scripts\Office\1.1\fi-fi\office_strings.debug.js" />
+    <Content Include="Scripts\Office\1.1\fi-fi\office_strings.js" />
+    <Content Include="Scripts\Office\1.1\fi-fi\outlook_strings.debug.js" />
+    <Content Include="Scripts\Office\1.1\fi-fi\outlook_strings.js" />
+    <Content Include="Scripts\Office\1.1\fr-fr\office_strings.debug.js" />
+    <Content Include="Scripts\Office\1.1\fr-fr\office_strings.js" />
+    <Content Include="Scripts\Office\1.1\fr-fr\outlook_strings.debug.js" />
+    <Content Include="Scripts\Office\1.1\fr-fr\outlook_strings.js" />
+    <Content Include="Scripts\Office\1.1\he-il\office_strings.debug.js" />
+    <Content Include="Scripts\Office\1.1\he-il\office_strings.js" />
+    <Content Include="Scripts\Office\1.1\he-il\outlook_strings.debug.js" />
+    <Content Include="Scripts\Office\1.1\he-il\outlook_strings.js" />
+    <Content Include="Scripts\Office\1.1\hi-in\office_strings.debug.js" />
+    <Content Include="Scripts\Office\1.1\hi-in\office_strings.js" />
+    <Content Include="Scripts\Office\1.1\hi-in\outlook_strings.debug.js" />
+    <Content Include="Scripts\Office\1.1\hi-in\outlook_strings.js" />
+    <Content Include="Scripts\Office\1.1\hr-hr\office_strings.debug.js" />
+    <Content Include="Scripts\Office\1.1\hr-hr\office_strings.js" />
+    <Content Include="Scripts\Office\1.1\hr-hr\outlook_strings.debug.js" />
+    <Content Include="Scripts\Office\1.1\hr-hr\outlook_strings.js" />
+    <Content Include="Scripts\Office\1.1\hu-hu\office_strings.debug.js" />
+    <Content Include="Scripts\Office\1.1\hu-hu\office_strings.js" />
+    <Content Include="Scripts\Office\1.1\hu-hu\outlook_strings.debug.js" />
+    <Content Include="Scripts\Office\1.1\hu-hu\outlook_strings.js" />
+    <Content Include="Scripts\Office\1.1\id-id\office_strings.debug.js" />
+    <Content Include="Scripts\Office\1.1\id-id\office_strings.js" />
+    <Content Include="Scripts\Office\1.1\id-id\outlook_strings.debug.js" />
+    <Content Include="Scripts\Office\1.1\id-id\outlook_strings.js" />
+    <Content Include="Scripts\Office\1.1\it-it\office_strings.debug.js" />
+    <Content Include="Scripts\Office\1.1\it-it\office_strings.js" />
+    <Content Include="Scripts\Office\1.1\it-it\outlook_strings.debug.js" />
+    <Content Include="Scripts\Office\1.1\it-it\outlook_strings.js" />
+    <Content Include="Scripts\Office\1.1\ja-jp\office_strings.debug.js" />
+    <Content Include="Scripts\Office\1.1\ja-jp\office_strings.js" />
+    <Content Include="Scripts\Office\1.1\ja-jp\outlook_strings.debug.js" />
+    <Content Include="Scripts\Office\1.1\ja-jp\outlook_strings.js" />
+    <Content Include="Scripts\Office\1.1\kk-kz\office_strings.debug.js" />
+    <Content Include="Scripts\Office\1.1\kk-kz\office_strings.js" />
+    <Content Include="Scripts\Office\1.1\kk-kz\outlook_strings.debug.js" />
+    <Content Include="Scripts\Office\1.1\kk-kz\outlook_strings.js" />
+    <Content Include="Scripts\Office\1.1\ko-kr\office_strings.debug.js" />
+    <Content Include="Scripts\Office\1.1\ko-kr\office_strings.js" />
+    <Content Include="Scripts\Office\1.1\ko-kr\outlook_strings.debug.js" />
+    <Content Include="Scripts\Office\1.1\ko-kr\outlook_strings.js" />
+    <Content Include="Scripts\Office\1.1\lt-lt\office_strings.debug.js" />
+    <Content Include="Scripts\Office\1.1\lt-lt\office_strings.js" />
+    <Content Include="Scripts\Office\1.1\lt-lt\outlook_strings.debug.js" />
+    <Content Include="Scripts\Office\1.1\lt-lt\outlook_strings.js" />
+    <Content Include="Scripts\Office\1.1\lv-lv\office_strings.debug.js" />
+    <Content Include="Scripts\Office\1.1\lv-lv\office_strings.js" />
+    <Content Include="Scripts\Office\1.1\lv-lv\outlook_strings.debug.js" />
+    <Content Include="Scripts\Office\1.1\lv-lv\outlook_strings.js" />
+    <Content Include="Scripts\Office\1.1\ms-my\office_strings.debug.js" />
+    <Content Include="Scripts\Office\1.1\ms-my\office_strings.js" />
+    <Content Include="Scripts\Office\1.1\ms-my\outlook_strings.debug.js" />
+    <Content Include="Scripts\Office\1.1\ms-my\outlook_strings.js" />
+    <Content Include="Scripts\Office\1.1\nb-no\office_strings.debug.js" />
+    <Content Include="Scripts\Office\1.1\nb-no\office_strings.js" />
+    <Content Include="Scripts\Office\1.1\nb-no\outlook_strings.debug.js" />
+    <Content Include="Scripts\Office\1.1\nb-no\outlook_strings.js" />
+    <Content Include="Scripts\Office\1.1\nl-nl\office_strings.debug.js" />
+    <Content Include="Scripts\Office\1.1\nl-nl\office_strings.js" />
+    <Content Include="Scripts\Office\1.1\nl-nl\outlook_strings.debug.js" />
+    <Content Include="Scripts\Office\1.1\nl-nl\outlook_strings.js" />
+    <Content Include="Scripts\Office\1.1\o15apptofilemappingtable.debug.js" />
+    <Content Include="Scripts\Office\1.1\o15apptofilemappingtable.js" />
+    <None Include="Scripts\Office\1.1\office-vsdoc.js" />
+    <Content Include="Scripts\Office\1.1\office.debug.js" />
+    <Content Include="Scripts\Office\1.1\office.js" />
+    <Content Include="Scripts\Office\1.1\OfficeThemes.css" />
+    <Content Include="Scripts\Office\1.1\outlook-15.01.debug.js" />
+    <Content Include="Scripts\Office\1.1\outlook-15.01.js" />
+    <Content Include="Scripts\Office\1.1\outlook-15.debug.js" />
+    <Content Include="Scripts\Office\1.1\outlook-15.js" />
+    <Content Include="Scripts\Office\1.1\outlook-web-16.00.debug.js" />
+    <Content Include="Scripts\Office\1.1\outlook-web-16.00.js" />
+    <Content Include="Scripts\Office\1.1\outlook-win32-16.00.debug.js" />
+    <Content Include="Scripts\Office\1.1\outlook-win32-16.00.js" />
+    <None Include="Scripts\Office\1.1\outlook-win32.debug-vsdoc.js" />
+    <Content Include="Scripts\Office\1.1\outlookwebapp-15.01.debug.js" />
+    <Content Include="Scripts\Office\1.1\outlookwebapp-15.01.js" />
+    <Content Include="Scripts\Office\1.1\outlookwebapp-15.debug.js" />
+    <Content Include="Scripts\Office\1.1\outlookwebapp-15.js" />
+    <Content Include="Scripts\Office\1.1\pl-pl\office_strings.debug.js" />
+    <Content Include="Scripts\Office\1.1\pl-pl\office_strings.js" />
+    <Content Include="Scripts\Office\1.1\pl-pl\outlook_strings.debug.js" />
+    <Content Include="Scripts\Office\1.1\pl-pl\outlook_strings.js" />
+    <Content Include="Scripts\Office\1.1\powerpoint-15.01.debug.js" />
+    <Content Include="Scripts\Office\1.1\powerpoint-15.01.js" />
+    <Content Include="Scripts\Office\1.1\powerpoint-15.debug.js" />
+    <Content Include="Scripts\Office\1.1\powerpoint-15.js" />
+    <Content Include="Scripts\Office\1.1\powerpoint-web-16.00.debug.js" />
+    <Content Include="Scripts\Office\1.1\powerpoint-web-16.00.js" />
+    <Content Include="Scripts\Office\1.1\powerpoint-win32-16.00.debug.js" />
+    <Content Include="Scripts\Office\1.1\powerpoint-win32-16.00.js" />
+    <Content Include="Scripts\Office\1.1\project-15.01.debug.js" />
+    <Content Include="Scripts\Office\1.1\project-15.01.js" />
+    <Content Include="Scripts\Office\1.1\project-15.debug.js" />
+    <Content Include="Scripts\Office\1.1\project-15.js" />
+    <Content Include="Scripts\Office\1.1\project-win32-16.00.debug.js" />
+    <Content Include="Scripts\Office\1.1\project-win32-16.00.js" />
+    <Content Include="Scripts\Office\1.1\pt-br\office_strings.debug.js" />
+    <Content Include="Scripts\Office\1.1\pt-br\office_strings.js" />
+    <Content Include="Scripts\Office\1.1\pt-br\outlook_strings.debug.js" />
+    <Content Include="Scripts\Office\1.1\pt-br\outlook_strings.js" />
+    <Content Include="Scripts\Office\1.1\pt-pt\office_strings.debug.js" />
+    <Content Include="Scripts\Office\1.1\pt-pt\office_strings.js" />
+    <Content Include="Scripts\Office\1.1\pt-pt\outlook_strings.debug.js" />
+    <Content Include="Scripts\Office\1.1\pt-pt\outlook_strings.js" />
+    <Content Include="Scripts\Office\1.1\ro-ro\office_strings.debug.js" />
+    <Content Include="Scripts\Office\1.1\ro-ro\office_strings.js" />
+    <Content Include="Scripts\Office\1.1\ro-ro\outlook_strings.debug.js" />
+    <Content Include="Scripts\Office\1.1\ro-ro\outlook_strings.js" />
+    <Content Include="Scripts\Office\1.1\ru-ru\office_strings.debug.js" />
+    <Content Include="Scripts\Office\1.1\ru-ru\office_strings.js" />
+    <Content Include="Scripts\Office\1.1\ru-ru\outlook_strings.debug.js" />
+    <Content Include="Scripts\Office\1.1\ru-ru\outlook_strings.js" />
+    <Content Include="Scripts\Office\1.1\sk-sk\office_strings.debug.js" />
+    <Content Include="Scripts\Office\1.1\sk-sk\office_strings.js" />
+    <Content Include="Scripts\Office\1.1\sk-sk\outlook_strings.debug.js" />
+    <Content Include="Scripts\Office\1.1\sk-sk\outlook_strings.js" />
+    <Content Include="Scripts\Office\1.1\sl-si\office_strings.debug.js" />
+    <Content Include="Scripts\Office\1.1\sl-si\office_strings.js" />
+    <Content Include="Scripts\Office\1.1\sl-si\outlook_strings.debug.js" />
+    <Content Include="Scripts\Office\1.1\sl-si\outlook_strings.js" />
+    <Content Include="Scripts\Office\1.1\sr-latn-cs\office_strings.debug.js" />
+    <Content Include="Scripts\Office\1.1\sr-latn-cs\office_strings.js" />
+    <Content Include="Scripts\Office\1.1\sr-latn-cs\outlook_strings.debug.js" />
+    <Content Include="Scripts\Office\1.1\sr-latn-cs\outlook_strings.js" />
+    <Content Include="Scripts\Office\1.1\sv-se\office_strings.debug.js" />
+    <Content Include="Scripts\Office\1.1\sv-se\office_strings.js" />
+    <Content Include="Scripts\Office\1.1\sv-se\outlook_strings.debug.js" />
+    <Content Include="Scripts\Office\1.1\sv-se\outlook_strings.js" />
+    <Content Include="Scripts\Office\1.1\th-th\office_strings.debug.js" />
+    <Content Include="Scripts\Office\1.1\th-th\office_strings.js" />
+    <Content Include="Scripts\Office\1.1\th-th\outlook_strings.debug.js" />
+    <Content Include="Scripts\Office\1.1\th-th\outlook_strings.js" />
+    <Content Include="Scripts\Office\1.1\tr-tr\office_strings.debug.js" />
+    <Content Include="Scripts\Office\1.1\tr-tr\office_strings.js" />
+    <Content Include="Scripts\Office\1.1\tr-tr\outlook_strings.debug.js" />
+    <Content Include="Scripts\Office\1.1\tr-tr\outlook_strings.js" />
+    <Content Include="Scripts\Office\1.1\uk-ua\office_strings.debug.js" />
+    <Content Include="Scripts\Office\1.1\uk-ua\office_strings.js" />
+    <Content Include="Scripts\Office\1.1\uk-ua\outlook_strings.debug.js" />
+    <Content Include="Scripts\Office\1.1\uk-ua\outlook_strings.js" />
+    <Content Include="Scripts\Office\1.1\vi-vn\office_strings.debug.js" />
+    <Content Include="Scripts\Office\1.1\vi-vn\office_strings.js" />
+    <Content Include="Scripts\Office\1.1\vi-vn\outlook_strings.debug.js" />
+    <Content Include="Scripts\Office\1.1\vi-vn\outlook_strings.js" />
+    <Content Include="Scripts\Office\1.1\word-15.01.debug.js" />
+    <Content Include="Scripts\Office\1.1\word-15.01.js" />
+    <Content Include="Scripts\Office\1.1\word-15.debug.js" />
+    <Content Include="Scripts\Office\1.1\word-15.js" />
+    <Content Include="Scripts\Office\1.1\word-win32-16.00.debug.js" />
+    <Content Include="Scripts\Office\1.1\word-win32-16.00.js" />
+    <Content Include="Scripts\Office\1.1\zh-cn\office_strings.debug.js" />
+    <Content Include="Scripts\Office\1.1\zh-cn\office_strings.js" />
+    <Content Include="Scripts\Office\1.1\zh-cn\outlook_strings.debug.js" />
+    <Content Include="Scripts\Office\1.1\zh-cn\outlook_strings.js" />
+    <Content Include="Scripts\Office\1.1\zh-tw\office_strings.debug.js" />
+    <Content Include="Scripts\Office\1.1\zh-tw\office_strings.js" />
+    <Content Include="Scripts\Office\1.1\zh-tw\outlook_strings.debug.js" />
+    <Content Include="Scripts\Office\1.1\zh-tw\outlook_strings.js" />
+    <Content Include="Scripts\Office\metadata\endpoints.xml" />
+    <Content Include="Scripts\Office\metadata\features.xml" />
+    <Content Include="Scripts\Office\MicrosoftAjax.js" />
+    <Content Include="Scripts\Office\Themes\OfficeThemes.css" />
+    <Content Include="Scripts\PPE\Office.Controls.Login.js" />
+    <Content Include="Scripts\PPE\Office.Controls.People.js" />
+    <Content Include="Scripts\respond.js" />
+    <Content Include="Scripts\respond.matchmedia.addListener.js" />
+    <Content Include="Scripts\respond.matchmedia.addListener.min.js" />
+    <Content Include="Scripts\respond.min.js" />
+    <Content Include="Scripts\_officeintellisense.js" />
+    <None Include="Scripts\_references.js" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="App_Start\BundleConfig.cs" />
+    <Compile Include="App_Start\FilterConfig.cs" />
+    <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="App_Start\Startup.Auth.cs" />
+    <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\DashboardController.cs" />
+    <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\MailAFOController.cs" />
+    <Compile Include="Controllers\NotificationController.cs" />
+    <Compile Include="Controllers\O365CalendarController.cs" />
+    <Compile Include="Controllers\O365SiteProvisioningController.cs" />
+    <Compile Include="Controllers\PhotoController.cs" />
+    <Compile Include="Controllers\TestController.cs" />
+    <Compile Include="Controllers\WebHooksController.cs" />
+    <Compile Include="Global.asax.cs">
+      <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="Models\AuditRepairModel.cs" />
+    <Compile Include="Models\CalendarEvent.cs" />
+    <Compile Include="Models\CreateTaskViewModel.cs" />
+    <Compile Include="Models\Dashboard.cs" />
+    <Compile Include="Models\GraphModelsExtension.cs" />
+    <Compile Include="Models\MailAFOModel.cs" />
+    <Compile Include="Models\ProvisionDemoData.cs" />
+    <Compile Include="Models\RepairCompletionModel.cs" />
+    <Compile Include="Models\ScheduleRepairModel.cs" />
+    <Compile Include="Models\UploadFileModel.cs" />
+    <Compile Include="Models\WebHooks.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Services\ExcelService.cs" />
+    <Compile Include="Services\OneNoteService.cs" />
+    <Compile Include="Services\PlanService.cs" />
+    <Compile Include="Services\TasksService.cs" />
+    <Compile Include="Services\WorkflowProvisionService.cs" />
+    <Compile Include="Startup.cs" />
+    <Compile Include="Utils\AADAppSettings.cs" />
+    <Compile Include="Utils\AppSettings.cs" />
+    <Compile Include="Utils\AuthenticationHelper.cs" />
+    <Compile Include="Utils\CSOMUtil.cs" />
+    <Compile Include="Utils\GraphServiceExtension.cs" />
+    <Compile Include="Utils\HandleAdalExceptionAttribute.cs" />
+    <Compile Include="Utils\NaiveSessionCache.cs" />
+    <Compile Include="Utils\PagedCollectionExtensions.cs" />
+    <Compile Include="Utils\RestHelper.cs" />
+    <Compile Include="Utils\SiteProvisioning.cs" />
+    <Compile Include="Utils\VideoPortalHelper.cs" />
+    <Compile Include="Utils\WorkflowUtil.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\web.config" />
+    <Content Include="packages.config">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Content\bootstrap-theme.css.map" />
+    <Content Include="Content\bootstrap.css.map" />
+    <Content Include="Content\Fonts\Bootstrap\glyphicons-halflings-regular.eot" />
+    <Content Include="Content\Fonts\Bootstrap\glyphicons-halflings-regular.ttf" />
+    <Content Include="Content\Fonts\Bootstrap\glyphicons-halflings-regular.woff" />
+    <Content Include="Content\Fonts\Office365-Icons\fonts\icomoon.eot" />
+    <Content Include="Content\Fonts\Office365-Icons\fonts\icomoon.ttf" />
+    <Content Include="Content\Fonts\Office365-Icons\fonts\icomoon.woff" />
+    <Content Include="Content\Fonts\Office365-Icons\selection.json" />
+    <Content Include="Content\Fonts\Segoe-UI-Bold-Italic\3fa09cba-69f7-4b32-8f5f-f0af92543523-1.ttf" />
+    <Content Include="Content\Fonts\Segoe-UI-Bold-Italic\3fa09cba-69f7-4b32-8f5f-f0af92543523-1.woff2" />
+    <Content Include="Content\Fonts\Segoe-UI-Bold-Italic\3fa09cba-69f7-4b32-8f5f-f0af92543523-2.eot" />
+    <Content Include="Content\Fonts\Segoe-UI-Bold-Italic\3fa09cba-69f7-4b32-8f5f-f0af92543523-3.woff" />
+    <Content Include="Content\Fonts\Segoe-UI-Bold\f5dd91f1-2016-48f8-a46c-e3418a52c859-1.ttf" />
+    <Content Include="Content\Fonts\Segoe-UI-Bold\f5dd91f1-2016-48f8-a46c-e3418a52c859-1.woff2" />
+    <Content Include="Content\Fonts\Segoe-UI-Bold\f5dd91f1-2016-48f8-a46c-e3418a52c859-2.eot" />
+    <Content Include="Content\Fonts\Segoe-UI-Bold\f5dd91f1-2016-48f8-a46c-e3418a52c859-3.woff" />
+    <Content Include="Content\Fonts\Segoe-UI-Italic\05577455-4c3f-4f49-a71e-2c5b3055ec53-1.ttf" />
+    <Content Include="Content\Fonts\Segoe-UI-Italic\05577455-4c3f-4f49-a71e-2c5b3055ec53-1.woff2" />
+    <Content Include="Content\Fonts\Segoe-UI-Italic\05577455-4c3f-4f49-a71e-2c5b3055ec53-2.eot" />
+    <Content Include="Content\Fonts\Segoe-UI-Italic\05577455-4c3f-4f49-a71e-2c5b3055ec53-3.woff" />
+    <Content Include="Content\Fonts\Segoe-UI-Light-Italic\e23dde0e-e91f-41e0-b78c-ebb9e232e98d-1.ttf" />
+    <Content Include="Content\Fonts\Segoe-UI-Light-Italic\e23dde0e-e91f-41e0-b78c-ebb9e232e98d-1.woff2" />
+    <Content Include="Content\Fonts\Segoe-UI-Light-Italic\e23dde0e-e91f-41e0-b78c-ebb9e232e98d-2.eot" />
+    <Content Include="Content\Fonts\Segoe-UI-Light-Italic\e23dde0e-e91f-41e0-b78c-ebb9e232e98d-3.woff" />
+    <Content Include="Content\Fonts\Segoe-UI-Light\45a13f65-5199-4a22-821e-9b7d7795518e-1.ttf" />
+    <Content Include="Content\Fonts\Segoe-UI-Light\45a13f65-5199-4a22-821e-9b7d7795518e-1.woff2" />
+    <Content Include="Content\Fonts\Segoe-UI-Light\45a13f65-5199-4a22-821e-9b7d7795518e-2.eot" />
+    <Content Include="Content\Fonts\Segoe-UI-Light\45a13f65-5199-4a22-821e-9b7d7795518e-3.woff" />
+    <Content Include="Content\Fonts\Segoe-UI-Semibold-Italic\191748c9-7f55-43c3-a9c3-467cf18f896a-1.ttf" />
+    <Content Include="Content\Fonts\Segoe-UI-Semibold-Italic\191748c9-7f55-43c3-a9c3-467cf18f896a-1.woff2" />
+    <Content Include="Content\Fonts\Segoe-UI-Semibold-Italic\191748c9-7f55-43c3-a9c3-467cf18f896a-2.eot" />
+    <Content Include="Content\Fonts\Segoe-UI-Semibold-Italic\191748c9-7f55-43c3-a9c3-467cf18f896a-3.woff" />
+    <Content Include="Content\Fonts\Segoe-UI-Semibold\afae52c9-5d08-4193-8984-bb4346fd493c-1.ttf" />
+    <Content Include="Content\Fonts\Segoe-UI-Semibold\afae52c9-5d08-4193-8984-bb4346fd493c-1.woff2" />
+    <Content Include="Content\Fonts\Segoe-UI-Semibold\afae52c9-5d08-4193-8984-bb4346fd493c-2.eot" />
+    <Content Include="Content\Fonts\Segoe-UI-Semibold\afae52c9-5d08-4193-8984-bb4346fd493c-3.woff" />
+    <Content Include="Content\Fonts\Segoe-UI-Semilight-Italic\b01764d0-636e-4ff9-b1fb-4137a1a836aa-1.ttf" />
+    <Content Include="Content\Fonts\Segoe-UI-Semilight-Italic\b01764d0-636e-4ff9-b1fb-4137a1a836aa-1.woff2" />
+    <Content Include="Content\Fonts\Segoe-UI-Semilight-Italic\b01764d0-636e-4ff9-b1fb-4137a1a836aa-2.eot" />
+    <Content Include="Content\Fonts\Segoe-UI-Semilight-Italic\b01764d0-636e-4ff9-b1fb-4137a1a836aa-3.woff" />
+    <Content Include="Content\Fonts\Segoe-UI-Semilight\b692a79e-1bc5-4bcd-b355-7be3ef969fb7-1.ttf" />
+    <Content Include="Content\Fonts\Segoe-UI-Semilight\b692a79e-1bc5-4bcd-b355-7be3ef969fb7-1.woff2" />
+    <Content Include="Content\Fonts\Segoe-UI-Semilight\b692a79e-1bc5-4bcd-b355-7be3ef969fb7-2.eot" />
+    <Content Include="Content\Fonts\Segoe-UI-Semilight\b692a79e-1bc5-4bcd-b355-7be3ef969fb7-3.woff" />
+    <Content Include="Content\Fonts\Segoe-UI\3ca1af51-981a-4e1c-b9c6-a66d0a5fe3c0-1.ttf" />
+    <Content Include="Content\Fonts\Segoe-UI\3ca1af51-981a-4e1c-b9c6-a66d0a5fe3c0-1.woff2" />
+    <Content Include="Content\Fonts\Segoe-UI\3ca1af51-981a-4e1c-b9c6-a66d0a5fe3c0-2.eot" />
+    <Content Include="Content\Fonts\Segoe-UI\3ca1af51-981a-4e1c-b9c6-a66d0a5fe3c0-3.woff" />
+    <Content Include="Scripts\jquery-2.1.1.min.map" />
+    <Content Include="Templates\IncidentOneNotePage.cshtml" />
+    <Content Include="Templates\Web.config" />
+    <Content Include="Views\_ViewStart.cshtml" />
+    <Content Include="Views\O365SiteProvisioning\Index.cshtml" />
+    <Content Include="Views\O365SiteProvisioning\ProvisionDemoData.cshtml" />
+    <Content Include="Views\Dashboard\Index.cshtml" />
+    <Content Include="Views\Dashboard\Inspection.cshtml" />
+    <Content Include="Views\Dashboard\InspectionDetails.cshtml" />
+    <Content Include="Views\Dashboard\Property.cshtml" />
+    <Content Include="Views\Dashboard\RepairApproved.cshtml" />
+    <Content Include="Views\Dashboard\RepairComplete.cshtml" />
+    <Content Include="Views\Dashboard\RepairInProgress.cshtml" />
+    <Content Include="Views\Dashboard\ScheduleRepair.cshtml" />
+    <Content Include="Views\Home\IconAttribution.cshtml" />
+    <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Views\Home\Walkthrough.cshtml" />
+    <Content Include="Views\MailAFO\Index.cshtml" />
+    <Content Include="Views\MailAFO\Redir.cshtml" />
+    <Content Include="Views\Shared\Error.cshtml" />
+    <Content Include="Views\Shared\_DemoLayout.cshtml" />
+    <Content Include="Views\Shared\_Layout.cshtml" />
+    <Content Include="Views\Shared\_LoginPartial.cshtml" />
+    <Content Include="Views\Shared\_MailAFOLayout.cshtml" />
+    <Content Include="Service References\Office365\ConnectedService.json" />
+    <Content Include="Views\WebHooks\Index.cshtml" />
+    <Content Include="Views\WebHooks\Notification.cshtml" />
+    <Content Include="Views\WebHooks\Subscription.cshtml" />
+    <None Include="Web.Debug.config">
+      <DependentUpon>Web.config</DependentUpon>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Web.Release.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Content\Images\property2Incidents\" />
+    <Folder Include="Content\Images\property2Repairs\" />
+    <Folder Include="Views\Account\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Workflows\Incident.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
+  </ItemGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>True</UseIIS>
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>54664</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>https://localhost:44312/</IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>False</UseCustomServer>
+          <CustomServerUrl>
+          </CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.1\build\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.1\build\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props'))" />
+    <Error Condition="!Exists('..\packages\Microsoft.Net.Compilers.1.1.1\build\Microsoft.Net.Compilers.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.Net.Compilers.1.1.1\build\Microsoft.Net.Compilers.props'))" />
+  </Target>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

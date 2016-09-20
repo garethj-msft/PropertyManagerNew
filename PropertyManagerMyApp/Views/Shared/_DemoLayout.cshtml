@@ -1,0 +1,108 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - Property Manager My App</title>
+    @Styles.Render("~/Content/Office365-Icons")
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css" integrity="sha384-fLW2N01lMqjakBkx3l/M9EahuwpSfeNvV63J5ezn3uZzapT0u7EYsXMjQV+0En5r" crossorigin="anonymous">
+    <link rel="stylesheet" href="//ajax.aspnetcdn.com/ajax/jquery.ui/1.11.4/themes/smoothness/jquery-ui.css" />
+    @Styles.Render("~/Content/contoso")
+    <script src="//ajax.aspnetcdn.com/ajax/jQuery/jquery-2.1.4.min.js"></script>
+    <script src="//ajax.aspnetcdn.com/ajax/jquery.ui/1.11.4/jquery-ui.min.js"></script>
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="//appsforoffice.microsoft.com/fabric/1.0/fabric.min.css">
+    <link rel="stylesheet" href="//appsforoffice.microsoft.com/fabric/1.0/fabric.components.min.css">
+    <script src="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css">
+    <style>
+        /* Fix for Persona card width.  We will remove this code once the Office UX Fabric GitHub repo
+           is updated with the fix and we use the latest version of the Office UX Fabric that includes the fix.
+        */
+        .ms-PersonaCard-actionDetails {
+            list-style: none;
+            width: 100%; 
+            float: left;
+            min-height: 48px;
+            color: #666;
+            padding: 9px 20px;
+            transition: max-height .267s cubic-bezier(.1,.9,.2,1) .2s;
+            box-sizing: border-box;
+        }
+        #toast-container.toast-top-center>div{
+            margin-bottom:6px;
+        }
+    </style>
+    @RenderSection("scripts", required: false)
+</head>
+<body>
+    <header id="layout-header" class="group">
+        <div id="header" class="container-fluid bg-gray-dark office-banner">
+            <a>
+                <img class="office-logo" src="~/Content/Images/logo_office.png" alt="Office Logo" />
+            </a>
+        </div>
+        <div class="bg-teal">
+            <div class="container site-branding">
+                <div class="row">
+                    <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+                        <a href="/Dashboard/Index">
+                            <img class="contoso-logo" src="/Content/Images/contoso-logo.png" alt="Contoso Logo" />
+                        </a>
+                    </div>
+                    <div class="col-xs-8 col-sm-8 col-md-8 col-lg-8">
+                        <div class="login-area">
+                            @Html.Partial("_LoginPartial")
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+    @RenderBody()
+    <script>
+        $(function () {
+            toastr.options = {
+                "closeButton": true,
+                "debug": false,
+                "newestOnTop": true,
+                "progressBar": false,
+                "positionClass": "toast-top-right",
+                "preventDuplicates": false,
+                "showDuration": "300",
+                "hideDuration": "1000",
+                "timeOut": "5000",
+                "extendedTimeOut": "1000",
+                "showEasing": "swing",
+                "hideEasing": "linear",
+                "showMethod": "fadeIn",
+                "hideMethod": "fadeOut"
+            }
+            function checkReceivedMessages() {
+                $.getJSON("/Notification/GetMessages?t=" + Math.random())
+                .done(function (data) {
+                    if (data.status == "ok" && data.notifications != null) {
+                        for (var i = 0; i < data.notifications.length; i++) {
+                            var from = data.notifications[i].From.EmailAddress.Name;
+                            var title = data.notifications[i].Subject;
+                            toastr["info"](from, title)
+                        }
+                    }
+                    setTimeout(checkReceivedMessages, 9000);
+                })
+                .fail(function (jqxhr, textStatus, error) {
+                    setTimeout(checkReceivedMessages, 9000);
+                });
+            };
+            toastr.options.onclick = function () {
+                window.open("https://outlook.office.com/owa/", "_blank");
+            };
+            if ($(".notification").length == 0) {
+                checkReceivedMessages();
+            }
+            
+        });
+    </script>
+</body>
+</html>
