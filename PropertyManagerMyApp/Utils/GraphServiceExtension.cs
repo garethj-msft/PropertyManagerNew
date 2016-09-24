@@ -22,12 +22,6 @@ namespace SuiteLevelWebApp
         //by the GetGraphServiceAsync() method in the AuthenticationHelper class.
 
         //Controllers use these extension methods to interact with the Microsoft.Graph.GraphService
-        public static async Task<User[]> GetAllUsersAsync(this GraphServiceClient service)
-        {
-            var tenantDetails = await service.Users
-                .Request().GetAllAsync();
-            return tenantDetails;
-        }
 
         public static async Task<User[]> GetAllUsersAsync(this GraphServiceClient service, IEnumerable<string> displayNames)
         {
@@ -64,13 +58,6 @@ namespace SuiteLevelWebApp
             }
         }
 
-        public static async Task<User> AddUserAsync(this GraphServiceClient service, /*string LoginName, string DisplayName, string Password*/User user)
-        {
-            User newUser = await service.Users.Request().AddAsync(user);
-
-            return newUser;
-        }
-
         public static async Task<User[]> GetGroupMembersAsync(this GraphServiceClient service, string groupName)
         {
             var group = await GetGroupByDisplayNameAsync(service, groupName);
@@ -95,46 +82,6 @@ namespace SuiteLevelWebApp
             return users.ToArray();
         }
 
-        public static async Task AddUserToGroupMembersAsync(this GraphServiceClient service, Group group, User user, string accessToken)
-        {
-            var requestMessage = new HttpRequestMessage(HttpMethod.Post, string.Format("{0}groups/{1}/members/$ref", AADAppSettings.GraphResourceUrl, group.Id));
-            var odataID = string.Format("{0}directoryObjects/{1}", AADAppSettings.GraphResourceUrl, user.Id);
-            Dictionary<string, string> oData = new Dictionary<string, string>();
-            oData.Add("@odata.id", odataID);
-            requestMessage.Content = new StringContent(JsonConvert.SerializeObject(oData), System.Text.Encoding.UTF8, "application/json");
-
-            using (var client = new HttpClient())
-            {
-                client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", accessToken);
-                client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-                var responseMessage = await client.SendAsync(requestMessage);
-
-                if (responseMessage.StatusCode != System.Net.HttpStatusCode.NoContent)
-                    throw new Exception();
-            }
-            return;
-        }
-        public static async Task AddUserToGroupOwnersAsync(this GraphServiceClient service, Group group, User user, string accessToken)
-        {
-            var requestMessage = new HttpRequestMessage(HttpMethod.Post, string.Format("{0}groups/{1}/owners/$ref", AADAppSettings.GraphResourceUrl, group.Id));
-            var odataID = string.Format("{0}users/{1}", AADAppSettings.GraphResourceUrl, user.Id);
-            Dictionary<string, string> oData = new Dictionary<string, string>();
-            oData.Add("@odata.id", odataID);
-            requestMessage.Content = new StringContent(JsonConvert.SerializeObject(oData), System.Text.Encoding.UTF8, "application/json");
-
-            using (var client = new HttpClient())
-            {
-                client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", accessToken);
-                client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-                var responseMessage = await client.SendAsync(requestMessage);
-
-                if (responseMessage.StatusCode != System.Net.HttpStatusCode.NoContent)
-                    throw new Exception();
-            }
-            return;
-        }
-
-
         public static async Task AssignLicenseAsync(this GraphServiceClient service, User user)
         {
             var subscribedSkus = await service.SubscribedSkus.Request().GetAllAsync();
@@ -149,30 +96,7 @@ namespace SuiteLevelWebApp
             }
         }
 
-        public static async Task<Subscription> GetSubscriptionAsync(this GraphServiceClient service, string graphAccessToken, string subscriptionId)
-        {
-            Subscription subscription = null;
-            try
-            {
-                SubscriptionRequestBuilder builder = new SubscriptionRequestBuilder(string.Format("{0}subscriptions/{1}", AADAppSettings.GraphResourceUrl, subscriptionId), new BaseClient(AADAppSettings.GraphResourceUrl,
-                                        new DelegateAuthenticationProvider(
-                                            (requestMessage) =>
-                                            {
-                                                requestMessage.Headers.Authorization = new AuthenticationHeaderValue("bearer", graphAccessToken);
-                                                requestMessage.Method = HttpMethod.Get;
-                                                requestMessage.Headers.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-                                                return Task.FromResult(0);
-                                            })));
-                subscription = await builder.Request().GetAsync();
-            }
-            catch
-            {
-                
-            }
-            return subscription;
-        }
-
-        public static async Task<Subscription> CreateSubscriptionAsync(this GraphServiceClient service, string graphAccessToken)
+        public static async Task<Subscription> CreateSubscriptionAsync(this GraphServiceClient service)
         {
             Subscription subscription = new Subscription()
             {
@@ -188,17 +112,7 @@ namespace SuiteLevelWebApp
             {
                 try
                 {
-                    SubscriptionRequestBuilder builder = new SubscriptionRequestBuilder(string.Format("{0}subscriptions", AADAppSettings.GraphResourceUrl), new BaseClient(AADAppSettings.GraphResourceUrl,
-                                            new DelegateAuthenticationProvider(
-                                                (requestMessage) =>
-                                                {
-                                                    requestMessage.Headers.Authorization = new AuthenticationHeaderValue("bearer", graphAccessToken);
-                                                    requestMessage.Method = HttpMethod.Post;
-                                                    requestMessage.Headers.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-                                                    return Task.FromResult(0);
-                                                })));
-                    subscription = await builder.Request().CreateAsync(subscription);
-
+                    subscription = await service.Subscriptions.Request().AddAsync(subscription);
                     break;
                 }
                 catch
@@ -208,83 +122,17 @@ namespace SuiteLevelWebApp
             }
             return subscription.Id != null ? subscription : null;
         }
-        public static async Task DeleteSubscriptionAsync(this GraphServiceClient service, string graphAccessToken, string subscriptionId)
+        public static async Task DeleteSubscriptionAsync(this GraphServiceClient service, string subscriptionId)
         {
             try
             {
-                var accessToken = await AuthenticationHelper.GetGraphAccessTokenAsync();
-                SubscriptionRequestBuilder builder = new Microsoft.Graph.SubscriptionRequestBuilder(string.Format("{0}subscriptions/{1}", AADAppSettings.GraphResourceUrl, subscriptionId), new Microsoft.Graph.BaseClient(AADAppSettings.GraphResourceUrl,
-                                                                        new DelegateAuthenticationProvider(
-                                                                            (requestMessage) =>
-                                                                            {
-                                                                                requestMessage.Headers.Authorization = new AuthenticationHeaderValue("bearer", accessToken);
-                                                                                requestMessage.Method = HttpMethod.Delete;
-                                                                                requestMessage.Headers.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-                                                                                return Task.FromResult(0);
-                                                                            })));
-
-                await builder.Request().DeleteAsync();
+                await service.Subscriptions[subscriptionId].Request().DeleteAsync();
                 return;
             }
             catch (Exception)
             {
                 //throw ex;
             }
-
         }
-
-        //public static async Task AssignLicenseAsync(this GraphServiceClient service, User user)
-        //{
-        //    var subscribedSkus = await service.SubscribedSkus.Request().GetAllAsnyc();
-
-        //    foreach (SubscribedSku sku in subscribedSkus)
-        //    {
-        //        //E3 Tenant = ENTERPRISEPACK
-        //        //E4 Tenant = ENTERPRISEPACKWITHCAL
-
-        //        if (sku.SkuPartNumber == "ENTERPRISEPACK")
-        //        {
-        //            if ((sku.PrepaidUnits.Enabled.Value > sku.ConsumedUnits) &&
-        //                (sku.CapabilityStatus == "Enabled"))
-        //            {
-        //                // create addLicense object and assign the Enterprise Sku GUID to the skuId
-        //                AssignedLicense addLicense = new AssignedLicense { SkuId = sku.SkuId.Value };
-
-        //                foreach (ServicePlanInfo servicePlan in sku.ServicePlans)
-        //                {
-        //                    // ---+++--- AVAILABLE SERVICE PLANS ---+++---
-        //                    // OFFICESUBSCRIPTION (Office Pro Plus)
-        //                    // MCOSTANDARD (Lync Online)
-        //                    // SHAREPOINTWAC (Office Web Apps)
-        //                    // SHAREPOINTENTERPRISE (Sharepoint Online)
-        //                    // EXCHANGE_S_ENTERPRISE (Exchange Online)
-
-
-        //                    if (servicePlan.ServicePlanName.Equals("MCOSTANDARD"))
-        //                    {
-        //                        //UPGrade SDK
-        //                        addLicense.DisabledPlans.ToList().Add(servicePlan.ServicePlanId.Value);
-        //                        break;
-        //                    }
-        //                }
-
-        //                IList<AssignedLicense> licensesToAdd = new[] { addLicense };
-        //               // IList<Guid> licensesToRemove = new Guid[] { };
-
-        //                // attempt to assign the license object to the new user 
-        //                try
-        //                {
-        //                    //await user.assignLicenseAsync(licensesToAdd, licensesToRemove);
-
-        //                    user.AssignedLicenses.ToList().AddRange(licensesToAdd/*, licensesToRemove*/);
-        //                }
-        //                catch (Exception e)
-        //                {
-        //                    throw e;
-        //                }
-        //            }
-        //        }
-        //    }
-        //}
     }
 }

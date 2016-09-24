@@ -89,7 +89,7 @@ namespace SuiteLevelWebApp.Models
             viewModel.Candidates = new List<InspectorViewModel>();
 
             IEnumerable<User> inspectors = await graphService.GetGroupMembersAsync("Inspectors");
-            IEnumerable<User> allUsers = await graphService.GetAllUsersAsync();
+            IEnumerable<User> allUsers = await graphService.Users.Request().GetAllAsync();
             var nonInspectors = allUsers.Except(inspectors, new UserComparerbyId());
 
             viewModel.Candidates.AddRange(nonInspectors.Select(i => new InspectorViewModel { DisplayName = i.DisplayName, Id = i.Id, PrincipalName = i.UserPrincipalName }));
@@ -430,7 +430,7 @@ namespace SuiteLevelWebApp.Models
             return false;
         }
 
-        public async Task CheckSubscriptionAsync(GraphServiceClient graphService, string accessToken)
+        public async Task CheckSubscriptionAsync(GraphServiceClient graphService)
         {
             Subscription subscription = System.Web.HttpContext.Current.Session["WebHookSubscription"] as Subscription;
             if (subscription != null && subscription.ExpirationDateTime.HasValue)
@@ -440,8 +440,8 @@ namespace SuiteLevelWebApp.Models
                 if (DateTimeOffset.Now.CompareTo(expiration) >= 0)
                 {
                     //delete old and recreate one
-                    await graphService.DeleteSubscriptionAsync(accessToken, subscription.Id);
-                    subscription = await graphService.CreateSubscriptionAsync(accessToken);
+                    await graphService.DeleteSubscriptionAsync(subscription.Id);
+                    subscription = await graphService.CreateSubscriptionAsync();
                     if (subscription != null)
                     {
                         System.Web.HttpContext.Current.Session["WebHookSubscription"] = subscription;
@@ -450,7 +450,7 @@ namespace SuiteLevelWebApp.Models
             }
             else
             {
-                subscription = await graphService.CreateSubscriptionAsync(accessToken);
+                subscription = await graphService.CreateSubscriptionAsync();
                 if (subscription != null)
                 {
                     System.Web.HttpContext.Current.Session["WebHookSubscription"] = subscription;

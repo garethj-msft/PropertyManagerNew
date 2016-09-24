@@ -58,8 +58,7 @@ namespace SuiteLevelWebApp.Controllers
                 try
                 {
                     GraphServiceClient graphServiceClient = await AuthenticationHelper.GetGraphServiceAsync(AADAppSettings.GraphResourceUrl);
-                    var accessToken = await AuthenticationHelper.GetGraphAccessTokenAsync();
-                    await graphServiceClient.DeleteSubscriptionAsync(accessToken, subscription.Id);
+                    await graphServiceClient.Subscriptions[subscription.Id].Request().DeleteAsync();
                     System.Web.HttpContext.Current.Session.Remove("WebHookSubscription");
                 }
                 catch (ServiceException e)
@@ -77,8 +76,7 @@ namespace SuiteLevelWebApp.Controllers
             try
             {
                 GraphServiceClient graphServiceClient = await AuthenticationHelper.GetGraphServiceAsync(AADAppSettings.GraphResourceUrl);
-                var accessToken = await AuthenticationHelper.GetGraphAccessTokenAsync();
-                await graphServiceClient.DeleteSubscriptionAsync(accessToken, subscriptionId);
+                await graphServiceClient.Subscriptions[subscriptionId].Request().DeleteAsync();
             }
             catch (ServiceException e)
             {

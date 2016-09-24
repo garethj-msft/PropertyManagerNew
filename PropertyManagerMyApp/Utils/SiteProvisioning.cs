@@ -439,7 +439,7 @@ namespace SuiteLevelWebApp.Utils
                         BusinessPhones = bp
                     };
 
-                    user = await GraphServiceExtension.AddUserAsync(graphService, user);
+                    user = await graphService.Users.Request().AddAsync(user);
                     await GraphServiceExtension.AssignLicenseAsync(graphService, user as Graph.User);
                 }
 
@@ -449,7 +449,7 @@ namespace SuiteLevelWebApp.Utils
                 {
                     try
                     {
-                        await GraphServiceExtension.AddUserToGroupMembersAsync(graphService, groupsDict[ownGroupDisplayName], user, graphAccessToken);
+                        await graphService.Groups[groupsDict[ownGroupDisplayName].Id].Members.References.Request().AddAsync(user);
                     }
                     catch { }
                 }
@@ -601,7 +601,7 @@ namespace SuiteLevelWebApp.Utils
             {
                 try
                 {
-                    await GraphServiceExtension.AddUserToGroupMembersAsync(graphService, group, user, graphAccessToken);
+                    await graphService.Groups[group.Id].Members.References.Request().AddAsync(user);
                 }
                 catch{ }
             }
@@ -610,7 +610,7 @@ namespace SuiteLevelWebApp.Utils
             {
                 try
                 {
-                    await GraphServiceExtension.AddUserToGroupOwnersAsync(graphService, group, user, graphAccessToken);
+                    await graphService.Groups[group.Id].Owners.References.Request().AddAsync(user);
                 }
                 catch{ }
             }

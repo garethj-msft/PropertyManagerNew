@@ -56,7 +56,7 @@ namespace SuiteLevelWebApp.Controllers
             Group gettingStarted = await graphService.GetGroupByDisplayNameAsync("GettingStarted");
 
             // Add the user to the GettingStarted group where newcomers share onboarding tasks
-            await graphService.AddUserToGroupMembersAsync(gettingStarted, candidate, graphAccessToken);
+            await graphService.Groups[gettingStarted.Id].Members.References.Request().AddAsync(candidate);
 
             var gettingStartedPlan = await PlanService.GetPlanAsync(gettingStarted);
             var bucket = await PlanService.GetBucketByNameAsync(gettingStartedPlan, "Unstarted");
@@ -82,7 +82,7 @@ namespace SuiteLevelWebApp.Controllers
             await GraphServiceExtension.AssignLicenseAsync(graphService, candidate);
 
             // Add the user to the Inspector's group
-            await graphService.AddUserToGroupMembersAsync(inspectors, candidate, graphAccessToken);
+            await graphService.Groups[inspectors.Id].Members.References.Request().AddAsync(candidate);
 
             return View(viewModel);
         }
@@ -97,7 +97,7 @@ namespace SuiteLevelWebApp.Controllers
             if (model == null) return HttpNotFound();
             var accessToken = await AuthenticationHelper.GetGraphAccessTokenAsync();
             TempData["accesstoken"] = accessToken;
-            await dashboardModel.CheckSubscriptionAsync(graphService, accessToken);
+            await dashboardModel.CheckSubscriptionAsync(graphService);
             return View(model);
         }
 
