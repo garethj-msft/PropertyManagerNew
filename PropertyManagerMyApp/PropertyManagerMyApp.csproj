@@ -931,6 +931,7 @@
     <Compile Include="Services\ExcelService.cs" />
     <Compile Include="Services\OneNoteService.cs" />
     <Compile Include="Services\PlanService.cs" />
+    <Compile Include="Services\SharePointService.cs" />
     <Compile Include="Services\TasksService.cs" />
     <Compile Include="Services\WorkflowProvisionService.cs" />
     <Compile Include="Startup.cs" />

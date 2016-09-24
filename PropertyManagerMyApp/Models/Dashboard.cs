@@ -973,5 +973,11 @@ namespace SuiteLevelWebApp.Models
         public string webUrl { get; set; }
         public PropertyExcelWorkbookItem[] propertyExcelWorkbookItems { get; set; }
     }
+
+    public class NewHireTaskListitem
+    {
+        public string Title { get; set; }
+        public string Description { get; set; }
+    }
     #endregion
 }

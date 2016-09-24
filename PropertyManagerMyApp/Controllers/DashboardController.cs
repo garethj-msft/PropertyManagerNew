@@ -49,33 +49,50 @@ namespace SuiteLevelWebApp.Controllers
 
         public async Task<ActionResult> AddInspectorExecute(AddInspectorViewModel viewModel)
         {
+            // Acquire all the fixed resources we'll need.
             var graphService = await AuthenticationHelper.GetGraphServiceAsync(AADAppSettings.GraphResourceUrl);
-            var graphAccessToken = await AuthenticationHelper.GetGraphAccessTokenAsync();
             User candidate = await graphService.Users[viewModel.SelectedCandidate].Request().GetAsync();
             Group inspectors = await graphService.GetGroupByDisplayNameAsync("Inspectors");
             Group gettingStarted = await graphService.GetGroupByDisplayNameAsync("GettingStarted");
+            Plan gettingStartedPlan = await PlanService.GetPlanAsync(gettingStarted);
+            Bucket bucket = await PlanService.GetBucketByNameAsync(gettingStartedPlan, "Unstarted");
 
             // Add the user to the GettingStarted group where newcomers share onboarding tasks
-            await graphService.Groups[gettingStarted.Id].Members.References.Request().AddAsync(candidate);
-
-            var gettingStartedPlan = await PlanService.GetPlanAsync(gettingStarted);
-            var bucket = await PlanService.GetBucketByNameAsync(gettingStartedPlan, "Unstarted");
-
-            // TODO: Iterate over the 'NewHireTasks' sharepoint list with the new API.
-
-            // foreach (Thingy listItem in thingiesFromNewHireTasks)
+            try
             {
-                // Make a Planner task in the 'GettingStarted' group for each task in the NewHireTasks list.
+                await graphService.Groups[gettingStarted.Id].Members.References.Request().AddAsync(candidate);
+            }
+            catch
+            {
+                // Assume failure means it's already in the group - as it often is during demos!
+            }
+ 
 
-                await PlanService.CreateTaskAsync(new task
+            // Iterate over the 'NewHireTasks' sharepoint list with the new preview API.
+            var site = await SharePointService.GetSiteByPathAsync("/sites/SuiteLevelAppDemo");
+
+            NewHireTaskListitem[] listitems = await SharePointService.GetListItemsFromSiteList<NewHireTaskListitem>(site, "NewHireTasks");
+
+            foreach (NewHireTaskListitem listItem in listitems)
+            {
+                try
                 {
-                    title = "Title", // listItem.Title
-                    assignedTo = candidate.Id,
-                    assignedBy = candidate.Id,
-                    percentComplete = 0,
-                    planId = bucket.planId,
-                    bucketId = bucket.id,
-                });
+                    // Make a Planner task in the 'GettingStarted' group for each task in the NewHireTasks list.
+                    task created = await PlanService.CreateTaskAsync(new task
+                    {
+                        title = listItem.Title,
+                        assignedTo = candidate.Id,
+                        percentComplete = 0,
+                        planId = bucket.planId,
+                        bucketId = bucket.id,
+                    });
+                    await PlanService.UpdateTaskDescriptionAsync(created, listItem.Description);
+                }
+                catch
+                {
+                    // Move on to the next if anything goes wrong.
+                    continue;
+                }
             }
 
             // Make sure new user has all the licenses they need.
