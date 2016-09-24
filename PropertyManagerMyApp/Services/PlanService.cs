@@ -162,7 +162,7 @@ namespace SuiteLevelWebApp.Services
             }
         }
 
-        public static async Task<task> CreateTaskAsync(task task)
+        public static async Task<PlannerTask> CreateTaskAsync(PlannerTask task)
         {
             var accessToken = AuthenticationHelper.GetGraphAccessTokenAsync();
             var tasksEndPoint = string.Format("{0}tasks", AADAppSettings.GraphBetaResourceUrl);
@@ -180,13 +180,13 @@ namespace SuiteLevelWebApp.Services
                     throw new Exception();
 
                 var payload = await responseMessage.Content.ReadAsStringAsync();
-                task = JsonConvert.DeserializeObject<task>(payload);
+                task = JsonConvert.DeserializeObject<PlannerTask>(payload);
                 task.etag = responseMessage.Headers.ETag;
                 return task;
             }
         }
 
-        public static async Task UpdateTaskDescriptionAsync(task task, string description)
+        public static async Task UpdateTaskDescriptionAsync(PlannerTask task, string description)
         {
             if (task.etag == null) throw new ArgumentNullException("task.etag");
 
@@ -210,11 +210,11 @@ namespace SuiteLevelWebApp.Services
             }
         }
 
-        public static async Task<task[]> GetTasksAsync(Plan plan)
+        public static async Task<PlannerTask[]> GetTasksAsync(Plan plan)
         {
             var accessToken = AuthenticationHelper.GetGraphAccessTokenAsync();
 
-            List<task> tasks = new List<task>();
+            List<PlannerTask> tasks = new List<PlannerTask>();
 
             var plansEndPoint = string.Format("{0}plans/{1}/Tasks?filter=percentComplete+ne+100", AADAppSettings.GraphBetaResourceUrl, plan.id);
 
@@ -233,7 +233,7 @@ namespace SuiteLevelWebApp.Services
 
                 foreach (var item in jobject["value"].Children())
                 {
-                    tasks.Add(new task
+                    tasks.Add(new PlannerTask
                     {
                         title = item["title"].ToString(),
                         assignedTo = !string.IsNullOrEmpty(item["assignedTo"].ToString()) ? item["assignedTo"].ToString() : "",

@@ -295,7 +295,7 @@ namespace SuiteLevelWebApp.Models
                 planId = (await plan).id
             });
 
-            await PlanService.CreateTaskAsync(new task
+            await PlanService.CreateTaskAsync(new PlannerTask
             {
                 title = "Clean up work site",
                 assignedTo = repairPeople.Id,
@@ -306,7 +306,7 @@ namespace SuiteLevelWebApp.Models
                 dueDateTime = new DateTimeOffset(model.TimeSlotsSelectedValue)
             });
 
-            await PlanService.CreateTaskAsync(new task
+            await PlanService.CreateTaskAsync(new PlannerTask
             {
                 title = "Have property owner sign repair completion document",
                 assignedTo = repairPeople.Id,
@@ -317,7 +317,7 @@ namespace SuiteLevelWebApp.Models
                 dueDateTime = new DateTimeOffset(model.TimeSlotsSelectedValue)
             });
 
-            await PlanService.CreateTaskAsync(new task
+            await PlanService.CreateTaskAsync(new PlannerTask
             {
                 title = "Call property owner to confirm repair appointment",
                 assignedTo = repairPeople.Id,

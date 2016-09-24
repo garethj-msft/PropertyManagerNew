@@ -25,7 +25,7 @@ namespace GraphModelsExtension
     }
 
     [DataContract()]
-    public class task
+    public class PlannerTask
     {
         [DataMember(Name = "id")]
         public string id { get; set; }

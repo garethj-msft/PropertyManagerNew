@@ -78,7 +78,7 @@ namespace SuiteLevelWebApp.Controllers
                 try
                 {
                     // Make a Planner task in the 'GettingStarted' group for each task in the NewHireTasks list.
-                    task created = await PlanService.CreateTaskAsync(new task
+                    PlannerTask created = await PlanService.CreateTaskAsync(new PlannerTask
                     {
                         title = listItem.Title,
                         assignedTo = candidate.Id,
