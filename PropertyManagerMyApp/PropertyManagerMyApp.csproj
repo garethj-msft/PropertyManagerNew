@@ -622,6 +622,7 @@
     <Content Include="Content\Workbooks\Property4\Property-Costs.xlsx" />
     <Content Include="Content\Workbooks\Property5\Property-Costs.xlsx" />
     <Content Include="components\PersonaCard\PersonaCard.scss" />
+    <Content Include="Content\Publish-iTunesAppsToIntune.ps1" />
     <None Include="Properties\PublishProfiles\promantest %282%29.pubxml" />
     <None Include="Properties\PublishProfiles\promantest.pubxml" />
     <Content Include="sass\_Office.Color.Variables.scss" />
